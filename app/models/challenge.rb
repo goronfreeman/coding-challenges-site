@@ -2,6 +2,8 @@ class Challenge < ActiveRecord::Base
   belongs_to :user
   has_one :difficulty
   has_and_belongs_to_many :tags, join_table: 'challenges_tags', foreign_key: 'challenge_id', association_foreign_key: 'tag_id'
+
+  validates :name, :short_description, :long_description, presence: true
 end
 
 # == Schema Information
