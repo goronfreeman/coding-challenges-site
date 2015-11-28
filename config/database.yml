@@ -1,0 +1,15 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: cc_user
+  password: cc_user
+  socket: /tmp/mysql.sock
+
+development:
+  <<: *default
+  database: cc_dev
+
+test:
+  <<: *default
+  database: cc_test
