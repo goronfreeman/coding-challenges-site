@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151128073258) do
+ActiveRecord::Schema.define(version: 20151129082714) do
 
   create_table "challenges", force: :cascade do |t|
     t.string   "name",              limit: 255
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20151128073258) do
     t.text     "long_description",  limit: 65535
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
-    t.integer  "difficulty",        limit: 4
     t.integer  "user_id",           limit: 4
+    t.integer  "difficulty_id",     limit: 4
   end
 
   create_table "challenges_tags", id: false, force: :cascade do |t|
@@ -31,15 +31,10 @@ ActiveRecord::Schema.define(version: 20151128073258) do
   add_index "challenges_tags", ["challenge_id"], name: "index_challenges_tags_on_challenge_id", using: :btree
   add_index "challenges_tags", ["tag_id"], name: "index_challenges_tags_on_tag_id", using: :btree
 
-  create_table "completed_challenges", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "difficulties", force: :cascade do |t|
-    t.string   "name",         limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+  create_table "completed_challenges", id: false, force: :cascade do |t|
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "user_id",      limit: 4
     t.integer  "challenge_id", limit: 4
   end
 
