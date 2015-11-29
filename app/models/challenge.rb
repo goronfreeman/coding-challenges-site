@@ -1,10 +1,11 @@
 class Challenge < ActiveRecord::Base
   belongs_to :user
-  belongs_to :difficulty
   has_many :user_completions, class_name: 'CompletedChallenge'
   has_and_belongs_to_many :tags, join_table: 'challenges_tags', foreign_key: 'challenge_id', association_foreign_key: 'tag_id'
 
   validates :name, :short_description, :long_description, :difficulty, presence: true
+
+  enum difficulty: [:easy, :medium, :hard]
 end
 
 # == Schema Information
@@ -19,4 +20,5 @@ end
 #  updated_at        :datetime         not null
 #  user_id           :integer
 #  difficulty_id     :integer
+#  difficulty        :integer
 #

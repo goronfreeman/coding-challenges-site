@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151129082714) do
+ActiveRecord::Schema.define(version: 20151129083028) do
 
   create_table "challenges", force: :cascade do |t|
     t.string   "name",              limit: 255
     t.text     "short_description", limit: 65535
     t.text     "long_description",  limit: 65535
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.integer  "user_id",           limit: 4
-    t.integer  "difficulty_id",     limit: 4
+    t.integer  "difficulty",        limit: 4,     default: 0
   end
 
   create_table "challenges_tags", id: false, force: :cascade do |t|
