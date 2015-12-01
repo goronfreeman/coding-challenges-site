@@ -1,5 +1,13 @@
 class Tag < ActiveRecord::Base
-  has_and_belongs_to_many :challenges, join_table: 'challenges_tags', foreign_key: 'tag_id', association_foreign_key: 'challenge_id'
+  has_many :challenge_tags
+  has_many :challenges, through: :challenge_tags
+
+  validates :name, presence: true
+  validates :name, uniqueness: true
+  validates :name, inclusion: { in: ['Accessibility', 'API', 'Auth & Service',
+                                     'CMS', 'CSS', 'Database', 'Environments & Server',
+                                     'Git', 'JavaScript', 'Misc', 'Mobile/Hybrid', 'PHP',
+                                     'Task Runners', 'Terminal/Shell' ].map(&:downcase) }
 end
 
 # == Schema Information

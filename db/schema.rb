@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151129083028) do
+ActiveRecord::Schema.define(version: 20151130231912) do
+
+  create_table "challenge_tags", force: :cascade do |t|
+    t.integer  "challenge_id", limit: 4
+    t.integer  "tag_id",       limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "challenge_tags", ["challenge_id"], name: "index_challenge_tags_on_challenge_id", using: :btree
+  add_index "challenge_tags", ["tag_id"], name: "index_challenge_tags_on_tag_id", using: :btree
 
   create_table "challenges", force: :cascade do |t|
     t.string   "name",              limit: 255
@@ -22,14 +32,6 @@ ActiveRecord::Schema.define(version: 20151129083028) do
     t.integer  "user_id",           limit: 4
     t.integer  "difficulty",        limit: 4,     default: 0
   end
-
-  create_table "challenges_tags", id: false, force: :cascade do |t|
-    t.integer "challenge_id", limit: 4
-    t.integer "tag_id",       limit: 4
-  end
-
-  add_index "challenges_tags", ["challenge_id"], name: "index_challenges_tags_on_challenge_id", using: :btree
-  add_index "challenges_tags", ["tag_id"], name: "index_challenges_tags_on_tag_id", using: :btree
 
   create_table "completed_challenges", id: false, force: :cascade do |t|
     t.datetime "created_at",             null: false
@@ -62,4 +64,6 @@ ActiveRecord::Schema.define(version: 20151129083028) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "challenge_tags", "challenges"
+  add_foreign_key "challenge_tags", "tags"
 end
