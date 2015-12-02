@@ -2,4 +2,10 @@ user_one = User.create!(email: 'test@test.com', password: 'password', password_c
 
 challenge_one = user_one.challenges.create!(name: 'Lorem Ipsum', short_description: 'dolor sit amet.', long_description: 'consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')
 
-tag_one = challenge_one.tags.create!(name: 'css')
+tags = ['Accessibility', 'API', 'Auth & Service',
+        'CMS', 'CSS', 'Database', 'Environments & Server', 'Git', 'JavaScript',
+        'Misc', 'Mobile/Hybrid', 'PHP', 'Task Runners', 'Terminal/Shell']
+
+tags.each do |tag|
+  Tag.create(name: tag)
+end

@@ -4,10 +4,8 @@ class Tag < ActiveRecord::Base
 
   validates :name, presence: true
   validates :name, uniqueness: true
-  validates :name, inclusion: { in: ['Accessibility', 'API', 'Auth & Service',
-                                     'CMS', 'CSS', 'Database', 'Environments & Server',
-                                     'Git', 'JavaScript', 'Misc', 'Mobile/Hybrid', 'PHP',
-                                     'Task Runners', 'Terminal/Shell' ].map(&:downcase) }
+  validates :name, inclusion: { in: ['Accessibility', 'API', 'Auth & Service', 'CMS', 'CSS', 'Database', 'Environments & Server',
+                                     'Git', 'JavaScript', 'Misc', 'Mobile/Hybrid', 'PHP', 'Task Runners', 'Terminal/Shell'] }
 end
 
 # == Schema Information

@@ -1,0 +1,17 @@
+<h1>New</h1>
+<%= form_for(@challenge) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, autofocus: true, class: 'form_control' %>
+
+  <%= f.label :short_description %>
+  <%= f.text_field :short_description, class: 'form_control' %>
+
+  <%= f.label :long_description %>
+  <%= f.text_field :long_description, class: 'form_control' %>
+
+  <%= f.label :difficulty %>
+  <%= f.text_field :difficulty, class: 'form_control' %>
+  <%#= f.collection_select :tag_id, Tag.all, :id, :name %>
+
+  <%= f.submit 'create' %>
+<% end %>
