@@ -1,10 +1,20 @@
 class ChallengesController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+
   def index
     @challenges = Challenge.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @challenges }
+    end
   end
 
   def show
     @challenge = Challenge.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json { render json: @challenge }
+    end
   end
 
   def new
@@ -37,8 +47,13 @@ class ChallengesController < ApplicationController
 
   def destroy
     @challenge = Challenge.find(params[:id])
-    @challenge.destroy
-    redirect_to root_path
+
+    if @challenge.user_id == current_user.id
+      @challenge.destroy
+      redirect_to root_path
+    else
+      redirect_to root_path
+    end
   end
 
   private

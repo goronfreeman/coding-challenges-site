@@ -1,5 +1,11 @@
 <h1>Index</h1>
 
 <% @challenges.each do |challenge| %>
-  <%= challenge.name %>
+  <h2><%= challenge.name %></h2>
+  <div><%= challenge.short_description %></div>
+  <div><%= challenge.long_description %></div>
+  <div><%= challenge.difficulty %></div>
+  <% challenge.tags.each do |tag| %>
+    <%= tag.name %>
+  <% end %>
 <% end %>

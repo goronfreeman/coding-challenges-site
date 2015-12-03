@@ -4,8 +4,8 @@ require 'faker'
 describe ChallengesController do
   context 'user is logged in' do
     before(:each) do
-      @user = User.create(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
-      sign_in @user
+      @my_user = User.create(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
+      sign_in @my_user
     end
 
     describe 'GET #index' do
@@ -20,7 +20,7 @@ describe ChallengesController do
       end
 
       it 'populates an array of challenges' do
-        my_challenge = @user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
+        my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
         get :index
         expect(assigns(:challenges)).to eq([my_challenge])
       end
@@ -28,7 +28,7 @@ describe ChallengesController do
 
     describe 'GET #show' do
       before(:each) do
-        @my_challenge = @user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
+        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
       end
 
       it 'has a 200 status code' do
@@ -100,7 +100,7 @@ describe ChallengesController do
 
     describe 'GET #edit' do
       before(:each) do
-        @my_challenge = @user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
+        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
       end
 
       it 'has a 200 status code' do
@@ -116,7 +116,7 @@ describe ChallengesController do
 
     describe 'PUT #update' do
       before(:each) do
-        @my_challenge = @user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
+        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
       end
 
       it 'has a 200 status code' do
@@ -155,9 +155,82 @@ describe ChallengesController do
         expect(response.status).to eq(200)
       end
 
-      it 'removes the challenge from the database' do
-        @my_challenge = @user.challenges.create!(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
-        expect { delete :destroy, id: @my_challenge.id }.to change(Challenge, :count).by(-1)
+      context 'current user owns challenge' do
+        it 'removes the challenge from the database' do
+          @my_challenge = @my_user.challenges.create!(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
+          expect { delete :destroy, id: @my_challenge.id }.to change(Challenge, :count).by(-1)
+        end
+      end
+
+      context 'current user does not own challenge' do
+        before(:each) do
+          @my_challenge = @my_user.challenges.create!(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
+          sign_out @my_user
+          @other_user = User.create(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
+          sign_in @other_user
+        end
+
+        it 'does not remove the challenge from the database' do
+          expect { delete :destroy, id: @my_challenge.id }.to change(Challenge, :count).by(0)
+        end
+
+        it 'redirects to the home page' do
+          delete :destroy, id: @my_challenge.id
+          expect(response).to redirect_to(root_path)
+        end
+      end
+    end
+  end
+
+  context 'user is logged out' do
+    describe 'GET #index' do
+      it 'has a 200 status code' do
+        get :index
+        expect(response.status).to eq(200)
+      end
+
+      it 'renders the :index template' do
+        get :index
+        expect(response).to render_template('index')
+      end
+
+      it 'populates an array of challenges' do
+        my_user = User.create(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
+        my_challenge = my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
+
+        get :index
+        expect(assigns(:challenges)).to eq([my_challenge])
+      end
+    end
+
+    describe 'GET #show' do
+      before(:each) do
+        @my_user = User.create(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
+        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
+      end
+
+      it 'has a 200 status code' do
+        get :show, id: @my_challenge.id
+        expect(response.status).to eq(200)
+      end
+
+      it 'renders the :show template' do
+        get :show, id: @my_challenge.id
+        expect(response).to render_template('show')
+      end
+    end
+
+    describe 'GET #new' do
+      it 'redirects to the sign in page' do
+        get :new
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    describe 'POST #create' do
+      it 'redirects to the sign in page' do
+        post :create
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end

@@ -10,8 +10,10 @@
   <%= f.text_field :long_description, class: 'form_control' %>
 
   <%= f.label :difficulty %>
-  <%= f.text_field :difficulty, class: 'form_control' %>
-  <%#= f.collection_select :tag_id, Tag.all, :id, :name %>
+  <%= select('challenge', 'difficulty', Challenge.difficulties.keys.map {|difficulty| [difficulty]}, {prompt: 'Select Difficulty'}) %>
+
+  <%= f.label :tag %>
+  <%= select('tag', 'name', Tag.all.collect {|t| [t.name]}) %>
 
   <%= f.submit 'create' %>
 <% end %>

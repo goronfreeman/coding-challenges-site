@@ -5,8 +5,15 @@ class Challenge < ActiveRecord::Base
   has_many :tags, through: :challenge_tags
 
   validates :name, :short_description, :long_description, :user_id, :difficulty, presence: true
+  # validate :challenge_must_have_at_least_one_tag, on: :create
 
   enum difficulty: [:easy, :medium, :hard]
+
+  def challenge_must_have_at_least_one_tag
+    if tags.count < 1
+      errors.add(:base, 'must have at least one tag')
+    end
+  end
 end
 
 # == Schema Information
