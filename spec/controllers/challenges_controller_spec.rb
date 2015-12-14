@@ -93,7 +93,7 @@ describe ChallengesController do
             name: nil,
             short_description: Faker::Hipster.sentence,
             long_description: Faker::Hipster.sentence }
-          expect(response).to render_template(:new)
+          expect(response).to render_template('new')
         end
       end
     end
@@ -108,9 +108,29 @@ describe ChallengesController do
         expect(response.status).to eq(200)
       end
 
-      it 'renders the :edit template' do
-        get :edit, id: @my_challenge.id
-        expect(response).to render_template(:edit)
+      context 'current user owns challenge' do
+        it 'renders the :edit template' do
+          get :edit, id: @my_challenge.id
+          expect(response).to render_template('edit')
+        end
+      end
+
+      context 'current user does not own challenge' do
+        before(:each) do
+          sign_out @my_user
+          @other_user = User.create(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
+          sign_in @other_user
+        end
+
+        it 'does not render the :edit template' do
+          get :edit, id: @my_challenge.id
+          expect(response).to_not render_template('edit')
+        end
+
+        it 'redirects to the home page' do
+          get :edit, id: @my_challenge.id
+          expect(response).to redirect_to(root_path)
+        end
       end
     end
 
@@ -129,6 +149,7 @@ describe ChallengesController do
           @my_challenge.reload
           expect(@my_challenge.name).to include('Updated')
         end
+
         it 'redirects to the homepage' do
           put :update, id: @my_challenge.id, challenge: { name: 'Updated' }
           expect(response).to redirect_to(root_path)
@@ -145,7 +166,7 @@ describe ChallengesController do
         it 're-renders the :edit template' do
           put :update, id: @my_challenge.id, challenge: { name: nil }
           @my_challenge.reload
-          expect(response).to render_template(:edit)
+          expect(response).to render_template('edit')
         end
       end
     end
@@ -235,6 +256,3 @@ describe ChallengesController do
     end
   end
 end
-
-# TODO
-# test when user logged in and logged out
