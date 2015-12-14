@@ -6,6 +6,6 @@
   <div><%= challenge.long_description %></div>
   <div><%= challenge.difficulty %></div>
   <% challenge.tags.each do |tag| %>
-    <%= tag.name %>
+    <div class="tag"><%= tag.name %></div>
   <% end %>
 <% end %>
