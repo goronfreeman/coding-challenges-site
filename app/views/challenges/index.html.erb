@@ -1,11 +1,15 @@
-<h1>Index</h1>
-
 <% @challenges.each do |challenge| %>
-  <h2><%= challenge.name %></h2>
-  <div><%= challenge.short_description %></div>
-  <div><%= challenge.long_description %></div>
-  <div><%= challenge.difficulty %></div>
-  <% challenge.tags.each do |tag| %>
-    <div class="tag"><%= tag.name %></div>
-  <% end %>
+  <section class="challenge">
+    <h3><%= challenge.name %></h2>
+    <p><%= challenge.short_description %></p>
+    <!-- <p><%= challenge.long_description %></p> -->
+    <span><%= challenge.difficulty %></span>
+    <% challenge.tags.each do |tag| %>
+      <ul class="tags">
+        <li><a href="#"><%= tag.name %></a></li>
+      </ul>
+    <% end %>
+  </section>
 <% end %>
+
+<%= link_to 'New Challenge', new_challenge_path %>

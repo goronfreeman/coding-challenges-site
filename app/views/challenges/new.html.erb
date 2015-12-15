@@ -1,4 +1,3 @@
-<h1>New</h1>
 <%= form_for(@challenge) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name, autofocus: true, class: 'form_control' %>
@@ -10,10 +9,10 @@
   <%= f.text_field :long_description, class: 'form_control' %>
 
   <%= f.label :difficulty %>
-  <%= select('challenge', 'difficulty', Challenge.difficulties.keys.map {|difficulty| [difficulty]}, {prompt: 'Select Difficulty'}) %>
+  <%= f.select(:difficulty, Challenge.difficulties.keys.map {|difficulty| [difficulty]}, {prompt: 'Select Difficulty'}) %>
 
-  <%= f.label :tag %>
-  <%= select('tag', 'name', Tag.all.collect {|t| [t.name]}) %>
+  <%# f.label :tag %>
+  <%# f.select(:tag, Tag.all.map {|t| [t.name]}, {prompt: 'Select Tag'}) %>
 
-  <%= f.submit 'create' %>
+  <%= f.submit 'create', class: 'btn btn-primary' %>
 <% end %>
