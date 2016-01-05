@@ -1,15 +1,19 @@
+section.challenge {
+  background-color: #d1d1d1;
+}
+
 .challenge {
   align-items: center;
   background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 10px auto;
-  padding: 10px;
-  width: 50vw;
+  margin: 1rem auto;
+  padding: 1rem;
+  // width: 50vw;
 
   ul {
-    margin-top: 10px;
+    margin-top: 1rem;
   }
 
   h3 {
@@ -18,8 +22,8 @@
 
   hr {
     background: #eee;
-    height: 1px;
-    margin: 10px;
+    height: .1rem;
+    margin: 1rem;
     width: 100%;
   }
 }
@@ -41,7 +45,7 @@
     text-decoration: none;
   }
 
-  a:before {
+  a::before {
     border-color: transparent #0089e0 transparent transparent;
     border-style: solid;
     border-width: 12px 12px 12px 0;
@@ -54,7 +58,7 @@
     width: 0;
   }
 
-  a:after {
+  a::after {
     background: #fff;
     border-radius: 2px;
     content: '';
@@ -70,7 +74,7 @@
     background: #555;
   }
 
-  a:hover:before {
+  a:hover::before {
     border-color: transparent #555 transparent transparent;
   }
 }

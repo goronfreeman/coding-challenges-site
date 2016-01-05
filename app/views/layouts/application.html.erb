@@ -8,11 +8,27 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <header>
-    <ul>
-      <li><a href="#">Challenges</a></li>
-    </ul>
-  </header>
+  <main class="wrapper">
+
+    <nav class="navigation">
+      <section class="container">
+
+        <a href="#" class="navigation-title">
+          <h1 class="title">Coding Challenges</h1>
+        </a>
+
+        <ul class="navigation-list float-right">
+          <li class="navigation-item">
+            <a href="#" class="navigation-link">Challenges</a>
+          </li>
+          <li class="navigation-item">
+            <a href="#" class="navigation-link">Other</a>
+          </li>
+        </ul>
+
+      </section>
+    </nav>
+  </main>
 
 <%= yield %>
 

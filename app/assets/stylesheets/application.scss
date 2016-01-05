@@ -1,2 +1,93 @@
 @import 'milligram';
 @import 'challenges';
+
+// Base
+
+body {
+  margin-top: 5.2rem;
+}
+
+.wrapper {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+// Sections
+
+.container {
+  margin-bottom: 0;
+  max-width: 80rem;
+  padding-bottom: 7.5rem;
+  padding-top: 7.5rem;
+}
+
+// Navbar
+
+.navigation {
+  background: #f4f6f6;
+  border-bottom: .1rem solid #d1d1d1;
+  display: block;
+  height: 5.2rem;
+  left: 0;
+  max-width: 100%;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+
+  .container {
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+
+  .img {
+    height: 2rem;
+    position: relative;
+    top: .3rem;
+  }
+}
+
+.navigation-list {
+  list-style: none;
+  margin-bottom: 0;
+  margin-right: 5rem;
+}
+
+@media (min-width: 80.0rem) {
+  .navigation-list {
+    margin-right: 0;
+  }
+}
+
+.navigation-item {
+  float: left;
+  margin-bottom: 0;
+  margin-left: 2.5rem;
+  position: relative;
+}
+
+.navigation .title,
+.navigation-title {
+  color: #606c76;
+  display: inline;
+  font-size: 1.6rem;
+  line-height: 5.2rem;
+  padding: 0;
+  position: relative;
+  text-decoration: none;
+}
+
+.navigation-link {
+  display: inline;
+  font-size: 1.6rem;
+  line-height: 5.2rem;
+  padding: 0;
+  text-decoration: none;
+
+  &.active {
+    color: #606c76;
+  }
+}
