@@ -1,9 +1,10 @@
 <% @challenges.each do |challenge| %>
   <section class="challenge">
-    <h3><%= challenge.name %></h2>
+    <h3><a href="#"><%= challenge.name %></a></h3>
+    <hr>
     <p><%= challenge.short_description %></p>
     <!-- <p><%= challenge.long_description %></p> -->
-    <span><%= challenge.difficulty %></span>
+    <span class="tags"><%= link_to challenge.difficulty %></span>
     <% challenge.tags.each do |tag| %>
       <ul class="tags">
         <li><a href="#"><%= tag.name %></a></li>
@@ -12,4 +13,4 @@
   </section>
 <% end %>
 
-<%= link_to 'New Challenge', new_challenge_path %>
+<%= link_to 'New Challenge', new_challenge_path, class: 'button' %>

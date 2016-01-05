@@ -1,17 +1,12 @@
 class Challenge < ActiveRecord::Base
+  enum difficulty: [:easy, :medium, :hard]
+
   belongs_to :user
   has_many :user_completions, class_name: 'CompletedChallenge'
   has_many :challenge_tags
   has_many :tags, through: :challenge_tags
 
   validates :name, :short_description, :long_description, :user_id, :difficulty, presence: true
-  # validate :challenge_must_have_at_least_one_tag, on: :create
-
-  enum difficulty: [:easy, :medium, :hard]
-
-  def challenge_must_have_at_least_one_tag
-    errors.add(:base, 'must have at least one tag') if tags.count < 1
-  end
 end
 
 # == Schema Information
@@ -25,5 +20,5 @@ end
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  user_id           :integer
-#  difficulty        :integer          default(0)
+#  difficulty        :integer
 #

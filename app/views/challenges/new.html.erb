@@ -9,10 +9,10 @@
   <%= f.text_field :long_description, class: 'form_control' %>
 
   <%= f.label :difficulty %>
-  <%= f.select(:difficulty, Challenge.difficulties.keys.map {|difficulty| [difficulty]}, {prompt: 'Select Difficulty'}) %>
+  <%= f.select(:difficulty, Challenge.difficulties.keys.map {|difficulty| [difficulty]}, prompt: true) %>
 
-  <%# f.label :tag %>
-  <%# f.select(:tag, Tag.all.map {|t| [t.name]}, {prompt: 'Select Tag'}) %>
+  <%= f.label 'Tag' %>
+  <%= f.collection_select(:challenge_tag_ids, Tag.all, :id, :name, prompt: true) %>
 
   <%= f.submit 'create', class: 'btn btn-primary' %>
 <% end %>

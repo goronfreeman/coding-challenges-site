@@ -4,7 +4,7 @@ require 'faker'
 describe CompletedChallenge do
   before(:each) do
     @user = User.create(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
-    @challenge = @user.challenges.create!(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
+    @challenge = @user.challenges.create!(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
   end
 
   describe 'validations' do

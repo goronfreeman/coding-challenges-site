@@ -6,6 +6,10 @@ class ChallengesController < ApplicationController
     @challenges = Challenge.all
   end
 
+  def testing
+    @challenge = current_user.challenges.build
+  end
+
   def show
   end
 

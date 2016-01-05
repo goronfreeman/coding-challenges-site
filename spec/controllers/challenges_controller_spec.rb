@@ -20,7 +20,7 @@ describe ChallengesController do
       end
 
       it 'populates an array of challenges' do
-        my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
+        my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
         get :index
         expect(assigns(:challenges)).to eq([my_challenge])
       end
@@ -28,7 +28,7 @@ describe ChallengesController do
 
     describe 'GET #show' do
       before(:each) do
-        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
+        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
       end
 
       it 'has a 200 status code' do
@@ -65,7 +65,8 @@ describe ChallengesController do
             post :create, challenge: {
               name: Faker::App.name,
               short_description: Faker::Hipster.sentence,
-              long_description: Faker::Hipster.sentence }
+              long_description: Faker::Hipster.sentence,
+              difficulty: 'easy' }
           }.to change(Challenge, :count).by(1)
         end
 
@@ -73,7 +74,8 @@ describe ChallengesController do
           post :create, challenge: {
             name: Faker::App.name,
             short_description: Faker::Hipster.sentence,
-            long_description: Faker::Hipster.sentence }
+            long_description: Faker::Hipster.sentence,
+            difficulty: 'easy' }
           expect(response).to redirect_to(root_path)
         end
       end
@@ -84,7 +86,8 @@ describe ChallengesController do
             post :create, challenge: {
               name: nil,
               short_description: Faker::Hipster.sentence,
-              long_description: Faker::Hipster.sentence }
+              long_description: Faker::Hipster.sentence,
+              difficulty: 'easy' }
           }.to_not change(Challenge, :count)
         end
 
@@ -92,7 +95,8 @@ describe ChallengesController do
           post :create, challenge: {
             name: nil,
             short_description: Faker::Hipster.sentence,
-            long_description: Faker::Hipster.sentence }
+            long_description: Faker::Hipster.sentence,
+            difficulty: 'easy' }
           expect(response).to render_template('new')
         end
       end
@@ -100,7 +104,7 @@ describe ChallengesController do
 
     describe 'GET #edit' do
       before(:each) do
-        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
+        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
       end
 
       it 'has a 200 status code' do
@@ -136,7 +140,7 @@ describe ChallengesController do
 
     describe 'PUT #update' do
       before(:each) do
-        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
+        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
       end
 
       it 'has a 200 status code' do
@@ -178,14 +182,14 @@ describe ChallengesController do
 
       context 'current user owns challenge' do
         it 'removes the challenge from the database' do
-          @my_challenge = @my_user.challenges.create!(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
+          @my_challenge = @my_user.challenges.create!(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
           expect { delete :destroy, id: @my_challenge.id }.to change(Challenge, :count).by(-1)
         end
       end
 
       context 'current user does not own challenge' do
         before(:each) do
-          @my_challenge = @my_user.challenges.create!(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
+          @my_challenge = @my_user.challenges.create!(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
           sign_out @my_user
           @other_user = User.create(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
           sign_in @other_user
@@ -217,7 +221,7 @@ describe ChallengesController do
 
       it 'populates an array of challenges' do
         my_user = User.create(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
-        my_challenge = my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
+        my_challenge = my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
 
         get :index
         expect(assigns(:challenges)).to eq([my_challenge])
@@ -227,7 +231,7 @@ describe ChallengesController do
     describe 'GET #show' do
       before(:each) do
         @my_user = User.create(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
-        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence)
+        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
       end
 
       it 'has a 200 status code' do

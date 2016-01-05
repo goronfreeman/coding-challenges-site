@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151130231912) do
+ActiveRecord::Schema.define(version: 20151216044005) do
 
   create_table "challenge_tags", force: :cascade do |t|
     t.integer  "challenge_id", limit: 4
@@ -27,10 +27,10 @@ ActiveRecord::Schema.define(version: 20151130231912) do
     t.string   "name",              limit: 255
     t.text     "short_description", limit: 65535
     t.text     "long_description",  limit: 65535
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "user_id",           limit: 4
-    t.integer  "difficulty",        limit: 4,     default: 0
+    t.integer  "difficulty",        limit: 4
   end
 
   create_table "completed_challenges", id: false, force: :cascade do |t|

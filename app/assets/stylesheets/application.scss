@@ -1,3 +1,25 @@
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
 @import 'challenges';
+
+body {
+  background-color: #eee;
+  font-family: Helvetica;
+}
+
+header {
+  align-items: center;
+  background-color: #00bcd4;
+  display: flex;
+  height: 50px;
+
+  li {
+    color: #fff;
+    list-style: none;
+  }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+}
