@@ -26,8 +26,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'annotate'
 gem 'faker', '~> 1.6', '>= 1.6.1'
-gem 'bootstrap-sass', '~> 3.3.6'
 gem 'autoprefixer-rails'
+gem 'normalize-scss'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
