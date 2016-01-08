@@ -52,4 +52,7 @@ group :development do
   gem 'spring'
 
   gem 'guard-rspec', require: false
+
+  gem 'better_errors'
+  gem 'pry-rails'
 end

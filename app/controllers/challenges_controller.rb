@@ -2,6 +2,18 @@ class ChallengesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :find_challenge, only: [:show, :edit, :update, :destroy]
 
+  def easy
+    @easy = Challenge.where("difficulty = 0")
+  end
+
+  def medium
+    @medium = Challenge.where("difficulty = 1")
+  end
+
+  def hard
+    @hard = Challenge.where("difficulty = 2")
+  end
+
   def index
     @challenges = Challenge.all
   end

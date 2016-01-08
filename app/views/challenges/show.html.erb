@@ -1,0 +1,15 @@
+  <section class="challenge">
+    <h3><a href="#"><%= @challenge.name %></a></h3>
+    <hr>
+    <p><%= @challenge.short_description %></p>
+    <p><%= @challenge.long_description %></p>
+    <ul class="tags">
+      <li class="tags">
+        <!-- REFACTOR -->
+        <%= link_to @challenge.difficulty, @challenge.difficulty %>
+      </li>
+      <% @challenge.tags.each do |tag| %>
+        <li><%= link_to tag.name, tag_path(tag) %></li>
+      <% end %>
+  </ul>
+  </section>

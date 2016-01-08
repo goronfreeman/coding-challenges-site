@@ -1,0 +1,9 @@
+<h1>Medium Challenges</h1>
+
+<ul>
+  <% @medium.each do |challenge| %>
+    <li>
+      <%= link_to challenge.name, challenge_path(challenge) %>
+    </li>
+  <% end %>
+</ul>
