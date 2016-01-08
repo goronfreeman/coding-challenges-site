@@ -18,4 +18,22 @@ describe TagsController do
       expect(assigns(:tags)).to eq([my_tag])
     end
   end
+
+  describe 'GET #show' do
+    before(:each) do
+      @my_tag = Tag.create(name: 'CSS')
+    end
+
+    it 'has a 200 status code' do
+      get :show, id: @my_tag.id
+      expect(response.status).to eq(200)
+    end
+
+    it 'renders the :show template' do
+      get :show, id: @my_tag.id
+      expect(response).to render_template('show')
+    end
+
+
+  end
 end

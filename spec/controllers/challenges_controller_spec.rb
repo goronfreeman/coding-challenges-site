@@ -8,6 +8,60 @@ describe ChallengesController do
       sign_in @my_user
     end
 
+    describe 'GET #easy' do
+      it 'has a 200 status code' do
+        get :easy
+        expect(response.status).to eq(200)
+      end
+
+      it 'renders the :easy template' do
+        get :easy
+        expect(response).to render_template('easy')
+      end
+
+      it 'populates an array of easy challenges' do
+        easy_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
+        get :easy
+        expect(assigns(:easy)).to eq([easy_challenge])
+      end
+    end
+
+    describe 'GET #medium' do
+      it 'has a 200 status code' do
+        get :medium
+        expect(response.status).to eq(200)
+      end
+
+      it 'renders the :medium template' do
+        get :medium
+        expect(response).to render_template('medium')
+      end
+
+      it 'populates an array of medium challenges' do
+        medium_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'medium')
+        get :medium
+        expect(assigns(:medium)).to eq([medium_challenge])
+      end
+    end
+
+    describe 'GET #hard' do
+      it 'has a 200 status code' do
+        get :hard
+        expect(response.status).to eq(200)
+      end
+
+      it 'renders the :hard template' do
+        get :hard
+        expect(response).to render_template('hard')
+      end
+
+      it 'populates an array of hard challenges' do
+        hard_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'hard')
+        get :hard
+        expect(assigns(:hard)).to eq([hard_challenge])
+      end
+    end
+
     describe 'GET #index' do
       it 'has a 200 status code' do
         get :index
