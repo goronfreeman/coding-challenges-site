@@ -1,9 +1,3 @@
 <h1>Easy Challenges</h1>
 
-<ul>
-  <% @easy.each do |challenge| %>
-    <li>
-      <%= link_to challenge.name, challenge_path(challenge) %>
-    </li>
-  <% end %>
-</ul>
+<%= render partial: 'difficulty', locals: {difficulty: @easy} %>
