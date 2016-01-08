@@ -55,4 +55,5 @@ group :development do
 
   gem 'better_errors'
   gem 'pry-rails'
+  gem 'quiet_assets'
 end
