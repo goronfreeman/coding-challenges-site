@@ -33,7 +33,5 @@ describe TagsController do
       get :show, id: @my_tag.id
       expect(response).to render_template('show')
     end
-
-
   end
 end

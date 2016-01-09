@@ -1,18 +1,20 @@
 <% @challenges.each do |challenge| %>
   <section class="challenge">
-    <h3><a href="#"><%= challenge.name %></a></h3>
+    <h3><%= link_to challenge.name, challenge_path(challenge) %></h3>
     <hr>
     <p><%= challenge.short_description %></p>
     <ul class="tags">
+      <% challenge.tags.each do |tag| %>
+        <li><%= link_to tag.name, tag_path(tag) %></li>
+      <% end %>
       <li class="tags">
         <!-- REFACTOR -->
         <%= link_to challenge.difficulty, 'challenges/' + challenge.difficulty %>
       </li>
-      <% challenge.tags.each do |tag| %>
-        <li><%= link_to tag.name, tag_path(tag) %></li>
-      <% end %>
   </ul>
   </section>
 <% end %>
 
-<%= link_to 'New Challenge', new_challenge_path, class: 'button' %>
+<% if user_signed_in? %>
+  <%= link_to 'New Challenge', new_challenge_path, class: 'button' %>
+<% end %>

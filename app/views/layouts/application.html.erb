@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CodingChallenges</title>
+  <title>coding_challenges</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag    'application', 'https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic' %>
+  <%= stylesheet_link_tag    'application', 'https://fonts.googleapis.com/icon?family=Material+Icons' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'favicon.png' %>
 </head>
 <body>
   <main class="wrapper">
@@ -13,17 +15,23 @@
     <nav class="navigation">
       <section class="container">
 
-        <a href="#" class="navigation-title">
-          <h1 class="title">Coding Challenges</h1>
-        </a>
+        <%= image_tag("logo.svg", height: '30', class: 'img', alt: "coding_challenges") %>
+        <h1 class="title"><%= link_to "coding challenges", root_path, class: "navigation-title" %></h1>
 
         <ul class="navigation-list float-right">
+          <li class="navigation-item"><%= link_to 'Challenges', challenges_path, class: "navigation-link" %></li>
+          <li class="navigation-item"><%= link_to 'Tags', tags_path, class: "navigation-link" %></li>
+
           <li class="navigation-item">
-            <a href="#" class="navigation-link">Challenges</a>
+            <% if user_signed_in? %>
+              <i class="material-icons">account_circle</i>
+              <%# image_tag("profile.svg", height: '30', alt: "profile picture") %>
+              <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'navigation-link' %>
+            <% else %>
+              <%= link_to "Sign in", new_user_session_path, class: 'navigation-link' %>
+            <% end %>
           </li>
-          <li class="navigation-item">
-            <a href="#" class="navigation-link">Other</a>
-          </li>
+        </li>
         </ul>
 
       </section>
