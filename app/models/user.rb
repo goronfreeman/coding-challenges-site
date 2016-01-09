@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :challenges
   has_many :completed_challenges
+  has_many :comments
 end
 
 # == Schema Information

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get 'challenges/medium', to: 'challenges#medium'
   get 'challenges/hard',   to: 'challenges#hard'
 
-  resources :challenges
+  resources :challenges do
+    resources :comments
+  end
   resources :tags
 end

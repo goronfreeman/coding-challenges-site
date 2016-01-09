@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216044005) do
+ActiveRecord::Schema.define(version: 20160109205936) do
 
   create_table "challenge_tags", force: :cascade do |t|
     t.integer  "challenge_id", limit: 4
@@ -32,6 +32,17 @@ ActiveRecord::Schema.define(version: 20151216044005) do
     t.integer  "user_id",           limit: 4
     t.integer  "difficulty",        limit: 4
   end
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "body",         limit: 65535
+    t.integer  "challenge_id", limit: 4
+    t.integer  "user_id",      limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "comments", ["challenge_id"], name: "index_comments_on_challenge_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "completed_challenges", id: false, force: :cascade do |t|
     t.datetime "created_at",             null: false
@@ -66,4 +77,6 @@ ActiveRecord::Schema.define(version: 20151216044005) do
 
   add_foreign_key "challenge_tags", "challenges"
   add_foreign_key "challenge_tags", "tags"
+  add_foreign_key "comments", "challenges"
+  add_foreign_key "comments", "users"
 end

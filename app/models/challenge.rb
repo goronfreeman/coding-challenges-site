@@ -5,6 +5,7 @@ class Challenge < ActiveRecord::Base
   has_many :user_completions, class_name: 'CompletedChallenge'
   has_many :challenge_tags
   has_many :tags, through: :challenge_tags
+  has_many :comments
 
   validates :name, :short_description, :long_description, :user_id, :difficulty, presence: true
 end

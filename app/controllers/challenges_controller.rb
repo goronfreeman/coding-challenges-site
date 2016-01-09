@@ -23,6 +23,8 @@ class ChallengesController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
+    @comment.challenge_id = @challenge.id
   end
 
   def new
