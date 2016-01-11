@@ -9,6 +9,7 @@
   padding: 1rem;
 
   h3 {
+    font-size: 2.3rem;
     margin: 0;
   }
 
@@ -16,6 +17,54 @@
     background: #eee;
     height: .1rem;
     margin: 1rem;
-    width: 100%;
+  }
+}
+
+.comment {
+  background-color: #fefefe;
+  border: 1px solid #eee;
+  margin-bottom: 1rem;
+  padding: 1rem;
+
+  .tagline {
+    margin-bottom: 0;
+
+    .username {
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+
+    .challenge-owner {
+      background-color: #8a57a3;
+      border-radius: 3px;
+      color: #fff;
+      padding: 1px 5px;
+    }
+
+    .timestamp {
+      color: #999;
+      font-size: 1.3rem;
+    }
+  }
+
+  .comment-body {
+    margin-bottom: .5rem;
+    margin-top: .5rem;
+  }
+
+  .comment-actions {
+    list-style: none;
+
+    li {
+      float: left;
+      font: {
+        size: 1.2rem;
+        weight: bold;
+      }
+
+      &:not(:first-child) {
+        margin-left: 1.5rem;
+      }
+    }
   }
 }

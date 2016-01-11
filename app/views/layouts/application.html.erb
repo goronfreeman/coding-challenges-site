@@ -3,8 +3,6 @@
 <head>
   <title>coding_challenges</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= stylesheet_link_tag    'application', 'https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic' %>
-  <%= stylesheet_link_tag    'application', 'https://fonts.googleapis.com/icon?family=Material+Icons' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'favicon.png' %>
@@ -25,7 +23,6 @@
           <li class="navigation-item">
             <% if user_signed_in? %>
               <i class="material-icons">account_circle</i>
-              <%# image_tag("profile.svg", height: '30', alt: "profile picture") %>
               <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'navigation-link' %>
             <% else %>
               <%= link_to "Sign in", new_user_session_path, class: 'navigation-link' %>

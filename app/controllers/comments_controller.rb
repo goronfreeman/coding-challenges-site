@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    redirect_to challenge_path(@challenge) unless @comment.user_id == current_user.id
   end
 
   def update
@@ -24,8 +25,9 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.update_attribute :body, '[deleted]'
-
+    if @comment.user_id == current_user.id
+      @comment.update_attribute :body, '[deleted]'
+    end
     redirect_to challenge_path(@challenge)
   end
 

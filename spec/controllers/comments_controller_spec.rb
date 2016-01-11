@@ -60,6 +60,8 @@ describe CommentsController do
       context 'current user does not own comment' do
         before(:each) do
           sign_out @my_user
+          @other_user = User.create(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
+          sign_in @other_user
         end
 
         it 'does not render the :edit template' do
@@ -67,10 +69,10 @@ describe CommentsController do
           expect(response).to_not render_template('edit')
         end
 
-        # it 'redirect to challenge#show' do
-        #   get :edit, challenge_id: @my_challenge.id, id: @my_comment.id
-        #   expect(response).to redirect_to(challenge_path(@my_challenge))
-        # end
+        it 'redirect to challenge#show' do
+          get :edit, challenge_id: @my_challenge.id, id: @my_comment.id
+          expect(response).to redirect_to(challenge_path(@my_challenge))
+        end
       end
     end
 
@@ -126,8 +128,13 @@ describe CommentsController do
       end
 
       context 'current user does not own comment' do
-        it 'does not replace comment body with [deleted]' do
+        before(:each) do
           sign_out @my_user
+          @other_user = User.create(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
+          sign_in @other_user
+        end
+
+        it 'does not replace comment body with [deleted]' do
           delete :destroy, id: @my_comment, challenge_id: @my_challenge
           @my_comment.reload
           expect(@my_comment.body).to_not include('[deleted]')

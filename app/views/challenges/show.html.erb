@@ -26,9 +26,11 @@
 
 </section>
 
-<section class="comments-form">
-  <h3>Post a Comment</h3>
-  <hr>
-  
-  <%= render partial: 'comments/form' %>
-</section>
+<% if user_signed_in? %>
+  <section class="comments-form">
+    <h3>Post a Comment</h3>
+    <hr>
+
+    <%= render partial: 'comments/form' %>
+  </section>
+<% end %>

@@ -1,15 +1,31 @@
-<div>
-  <h5>Comment by <%= comment.user.email %></h4>
-  <p class="comment"><%= comment.body %></p>
-  <p>
-    Posted <%= distance_of_time_in_words(Time.now, comment.created_at) %> ago
-    <% if comment.created_at != comment.updated_at %>
-      * (last edited <%= distance_of_time_in_words(Time.now, comment.updated_at) %> ago)
+<div class="comment">
+  <p class="tagline">
+    <!-- REFACTOR -->
+    <% if user_signed_in? && @challenge.user_id == current_user.id %>
+      <%= link_to comment.user.email, root_path, class: 'username challenge-owner' %>
+    <% else %>
+      <%= link_to comment.user.email, root_path, class: 'username' %>
     <% end %>
+
+    <span class="timestamp">
+      <%= distance_of_time_in_words(Time.now, comment.created_at) %> ago
+      <% if comment.created_at != comment.updated_at %>
+      * (last edited <%= distance_of_time_in_words(Time.now, comment.updated_at) %> ago)
+      <% end %>
+    </span>
+
   </p>
 
-  <% if user_signed_in? && current_user.id == comment.user.id %>
-    <%= link_to 'edit', edit_challenge_comment_path(@challenge, comment) %>
-    <%= link_to 'delete', challenge_comment_path(@challenge, comment), method: :delete, data: {confirm: 'Really delete the comment?'} %>
-  <% end %>
+  <p class="comment-body"><%= comment.body %></p>
+
+    <% if user_signed_in? %>
+      <ul class="comment-actions">
+        <li><a href="#">reply</a></li>
+
+        <% if current_user.id == comment.user.id %>
+          <li><%= link_to 'edit', edit_challenge_comment_path(@challenge, comment) %></li>
+          <li><%= link_to 'delete', challenge_comment_path(@challenge, comment), method: :delete, data: {confirm: 'Really delete the comment?'} %></li>
+        <% end %>
+      </ul>
+    <% end %>
 </div>
