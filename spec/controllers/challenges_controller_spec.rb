@@ -197,10 +197,6 @@ describe ChallengesController do
         @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
       end
 
-      it 'has a 200 status code' do
-        expect(response.status).to eq(200)
-      end
-
       context 'with valid attributes' do
         it 'saves the edited challenge to the database' do
           put :update, id: @my_challenge.id, challenge: { name: 'Updated' }
@@ -230,14 +226,18 @@ describe ChallengesController do
     end
 
     describe 'DELETE #destroy' do
-      it 'has a 200 status code' do
-        expect(response.status).to eq(200)
-      end
-
       context 'current user owns challenge' do
-        it 'removes the challenge from the database' do
+        before(:each) do
           @my_challenge = @my_user.challenges.create!(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
+        end
+
+        it 'removes the challenge from the database' do
           expect { delete :destroy, id: @my_challenge.id }.to change(Challenge, :count).by(-1)
+        end
+
+        it 'redirects to the home page' do
+          delete :destroy, id: @my_challenge.id
+          expect(response).to redirect_to(root_path)
         end
       end
 

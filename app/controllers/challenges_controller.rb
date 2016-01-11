@@ -42,7 +42,7 @@ class ChallengesController < ApplicationController
   end
 
   def edit
-    redirect_to root_path if @challenge.user_id != current_user.id
+    redirect_to root_path unless @challenge.user_id == current_user.id
   end
 
   def update

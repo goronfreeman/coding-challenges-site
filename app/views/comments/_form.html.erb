@@ -1,7 +1,4 @@
-<h3>Post a Comment</h3>
-<hr>
-
-<%= form_for [ @challenge, @comment ] do |f| %>
+<%= form_for [@challenge, @comment] do |f| %>
   <p>
     <%= f.label :body, 'Your Comment' %><br/>
     <%= f.text_area :body %>
