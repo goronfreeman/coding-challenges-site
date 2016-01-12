@@ -8,6 +8,7 @@
   <%= favicon_link_tag 'favicon.png' %>
 </head>
 <body>
+
   <main class="wrapper">
 
     <nav class="navigation">
@@ -18,14 +19,19 @@
 
         <ul class="navigation-list float-right">
           <li class="navigation-item"><%= link_to 'Challenges', challenges_path, class: "navigation-link" %></li>
-          <li class="navigation-item"><%= link_to 'Tags', tags_path, class: "navigation-link" %></li>
 
-          <li class="navigation-item">
             <% if user_signed_in? %>
-              <i class="material-icons">account_circle</i>
-              <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'navigation-link' %>
+            <li class="navigation-item">
+              <%= image_tag current_user.avatar_url, class: 'img' %>
+              <%= link_to current_user.username, destroy_user_session_path, method: :delete, class: 'navigation-link' %>
+            </li>
+              <%# link_to "Sign in with GitHub", users_authorize_path, class: 'navigation-link' %>
             <% else %>
-              <%= link_to "Sign in", new_user_session_path, class: 'navigation-link' %>
+              <li class="navigation-item"><%= link_to "Sign in", new_user_session_path, class: 'navigation-link' %></li>
+              <li class="navigation-item">
+                <%= image_tag 'github-mark', alt: 'github-mark', class: 'img' %>
+                <%= link_to "Sign in with GitHub", users_authorize_path, class: 'navigation-link' %>
+              </li>
             <% end %>
           </li>
         </li>

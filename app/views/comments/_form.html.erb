@@ -1,4 +1,4 @@
 <%= form_for [@challenge, @comment] do |f| %>
-    <%= f.text_area :body %>
+    <%= f.text_area :body, placeholder: 'Add your comment' %>
     <%= f.submit 'Submit' %>
 <% end %>

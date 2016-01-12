@@ -2,9 +2,9 @@
   <p class="tagline">
     <!-- REFACTOR -->
     <% if user_signed_in? && @challenge.user_id == current_user.id %>
-      <%= link_to comment.user.email, root_path, class: 'username challenge-owner' %>
+      <%= link_to comment.user.username, root_path, class: 'username challenge-owner' %>
     <% else %>
-      <%= link_to comment.user.email, root_path, class: 'username' %>
+      <%= link_to comment.user.username, root_path, class: 'username' %>
     <% end %>
 
     <span class="timestamp">
