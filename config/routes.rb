@@ -7,8 +7,12 @@ Rails.application.routes.draw do
   get 'challenges/medium', to: 'challenges#medium'
   get 'challenges/hard',   to: 'challenges#hard'
 
+  get 'users/authorize', to: 'users#authorize'
+  get 'users/callback', to: 'users#callback'
+
   resources :challenges do
     resources :comments
   end
+
   resources :tags
 end

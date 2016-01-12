@@ -23,4 +23,7 @@ end
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  github_token           :string(255)
+#  username               :string(255)
+#  avatar_url             :string(255)
 #

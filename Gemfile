@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+gem 'dotenv-rails', :groups => [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
@@ -28,6 +28,8 @@ gem 'annotate'
 gem 'faker', '~> 1.6', '>= 1.6.1'
 gem 'autoprefixer-rails'
 gem 'normalize-scss'
+gem 'octokit', '~> 4.0'
+gem 'github_api'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
