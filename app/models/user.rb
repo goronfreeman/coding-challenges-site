@@ -1,11 +1,30 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  devise :omniauthable, omniauth_providers: [:github]
+
   has_many :challenges
   has_many :completed_challenges
   has_many :comments
 
   validates :username, presence: true
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.username = auth.info.nickname
+      user.image = auth.info.image
+    end
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session['devise.github_data'] && session['devise.github_data']['extra']['raw_info']
+        user.email = data['email'] if user.email.blank?
+      end
+    end
+  end
 end
 
 # == Schema Information
@@ -25,7 +44,8 @@ end
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  github_token           :string(255)
+#  provider               :string(255)
+#  uid                    :string(255)
 #  username               :string(255)
-#  avatar_url             :string(255)
+#  image                  :string(255)
 #

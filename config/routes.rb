@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'registrations' }
+  devise_for :users, controllers: { :omniauth_callbacks => "users/omniauth_callbacks" }
+  # devise_scope :user do
+  #   delete 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
+  # end
+
   root 'challenges#index'
 
-  # REFACTOR
+  # TODO
   get 'challenges/easy',   to: 'challenges#easy'
   get 'challenges/medium', to: 'challenges#medium'
   get 'challenges/hard',   to: 'challenges#hard'
-
-  get 'users/authorize', to: 'users#authorize'
-  get 'users/callback', to: 'users#callback'
 
   resources :challenges do
     resources :comments

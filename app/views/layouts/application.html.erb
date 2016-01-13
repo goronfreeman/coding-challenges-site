@@ -24,8 +24,8 @@
               <li class="navigation-item">
                 <a href="#popover-grid" class="navigation-link" data-popover>
 
-                  <% if current_user.avatar_url %>
-                    <%= image_tag current_user.avatar_url, class: 'img' %>
+                  <% if current_user.image %>
+                    <%= image_tag current_user.image, class: 'img' %>
                   <% else %>
                     <i class="material-icons img">account_circle</i>
                   <% end %>
@@ -36,14 +36,7 @@
 
                 <div class="popover" id="popover-grid">
                   <ul class="popover-list">
-                    <li class="popover-item">
-                      <a href="#" class="popover-link">Profile</a>
-                    </li>
-
-                    <%# if current_user.github_token.nil? %>
-                      <li><%= link_to 'Link GitHub', users_authorize_path, class: 'popover-link' %></li>
-                    <%# end %>
-
+                    <li class="popover-item"><a href="#" class="popover-link">Profile</a></li>
                     <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'popover-link'%></li>
                   </ul>
                 </div>
@@ -52,6 +45,7 @@
             <% else %>
               <li class="navigation-item">
                 <%= link_to 'Sign up', new_user_registration_path, class: 'button button-outline' %>
+                <%= link_to 'Sign in with GitHub', user_omniauth_authorize_path(:github) %>
               </li>
               <li class="navigation-item"><%= link_to "Log in", new_user_session_path, class: 'button button-outline' %></li>
             <% end %>
