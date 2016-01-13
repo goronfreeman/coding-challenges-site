@@ -1,18 +1,6 @@
-<%= form_for(@challenge) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name, autofocus: true, class: 'form_control' %>
+<div class="challenge-form">
+  <h3>Submit a Challenge</h3>
+  <hr>
 
-  <%= f.label :short_description %>
-  <%= f.text_field :short_description, class: 'form_control' %>
-
-  <%= f.label :long_description %>
-  <%= f.text_field :long_description, class: 'form_control' %>
-
-  <%= f.label :difficulty %>
-  <%= f.select(:difficulty, Challenge.difficulties.keys.map {|difficulty| [difficulty]}, prompt: true) %>
-
-  <%= f.label 'Tag' %>
-  <%= f.collection_select(:challenge_tag_ids, Tag.all, :id, :name, prompt: true) %>
-
-  <%= f.submit 'create', class: 'btn btn-primary' %>
-<% end %>
+  <%= render 'form' %>
+</div>

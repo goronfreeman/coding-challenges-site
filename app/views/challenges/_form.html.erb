@@ -1,0 +1,13 @@
+<%= form_for(@challenge) do |f| %>
+  <%= f.text_field :name, autofocus: true, placeholder: 'challenge name', class: 'form_control' %>
+
+  <%= f.text_field :short_description, placeholder: 'short description', class: 'form_control' %>
+
+  <%= f.text_area :long_description, placeholder: 'long description',class: 'form_control' %>
+
+  <%= f.select(:difficulty, Challenge.difficulties.keys.map {|difficulty| [difficulty]}, prompt: 'Select a difficulty') %>
+
+  <%= f.collection_select(:challenge_tag_ids, Tag.all, :id, :name, prompt: 'Select a tag') %>
+
+  <%= f.submit 'Submit' %>
+<% end %>

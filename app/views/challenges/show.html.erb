@@ -1,6 +1,15 @@
 <section class="challenge">
   <h3><%= @challenge.name %></h3>
+  
+  <% if current_user.id == @challenge.user.id %>
+    <ul class="challenge-actions">
+      <li><%= link_to 'edit', edit_challenge_path(@challenge) %></li>
+      <li><%= link_to 'delete', challenge_path(@challenge), method: :delete, data: {confirm: 'Really delete the challenge?'} %></li>
+    </ul>
+  <% end %>
+
   <hr>
+
   <p><%= @challenge.short_description %></p>
   <p><%= @challenge.long_description %></p>
   <ul class="tags">
@@ -11,7 +20,7 @@
     <% @challenge.tags.each do |tag| %>
       <li><%= link_to tag.name, tag_path(tag) %></li>
     <% end %>
-</ul>
+  </ul>
 </section>
 
 <section class="comments">

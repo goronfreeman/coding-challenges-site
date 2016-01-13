@@ -37,4 +37,13 @@ describe Challenge do
       expect(challenge).to_not be_valid
     end
   end
+
+  describe 'associations' do
+    it 'destroys dependent comments' do
+      challenge = @user.challenges.create!(name: Faker::App.name, short_description: Faker::Lorem.sentence, long_description: Faker::Lorem.sentence, difficulty: 'easy' )
+      comment = @user.comments.create!(body: Faker::Lorem.sentence, challenge_id: challenge.id, user_id: @user.id)
+
+      expect { challenge.destroy }.to change { Comment.count }.by(-1)
+    end
+  end
 end

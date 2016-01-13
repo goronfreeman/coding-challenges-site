@@ -36,8 +36,8 @@
 
                 <div class="popover" id="popover-grid">
                   <ul class="popover-list">
-                    <li class="popover-item"><a href="#" class="popover-link">Profile</a></li>
-                    <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'popover-link'%></li>
+                    <li class="popover-item"><%= link_to 'Profile', user_path(current_user), class: 'popover-link' %></li>
+                    <li class="popover-item"><%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'popover-link'%></li>
                   </ul>
                 </div>
               </li>

@@ -1,0 +1,25 @@
+<h3><%= @user.username %></h3>
+<%= image_tag @user.image %>
+<hr>
+
+<h3>Comments</h3>
+
+<% if @user.comments.empty? %>
+  <p><%= @user.username %> has not commented.</p>
+<% else %>
+  <% @user.comments.each do |comment|%>
+    <%= comment.body %>
+  <% end %>
+<% end %>
+
+<hr>
+
+<h3>Challenges</h3>
+
+<% if @user.challenges.empty? %>
+  <p><%= @user.username %> has not made any challenges.</p>
+<% else %>
+  <% @user.challenges.each do |challenge| %>
+    <%= challenge.name %>
+  <% end %>
+<% end %>
