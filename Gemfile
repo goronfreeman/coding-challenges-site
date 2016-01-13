@@ -28,8 +28,7 @@ gem 'annotate'
 gem 'faker', '~> 1.6', '>= 1.6.1'
 gem 'autoprefixer-rails'
 gem 'normalize-scss'
-gem 'octokit', '~> 4.0'
-gem 'github_api'
+gem 'omniauth-github'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
