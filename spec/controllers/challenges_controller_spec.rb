@@ -4,7 +4,7 @@ require 'faker'
 describe ChallengesController do
   context 'user is logged in' do
     before(:each) do
-      @my_user = User.create(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
+      @my_user = User.create(email: Faker::Internet.email, username: Faker::Internet.user_name, password: 'password', password_confirmation: 'password')
       sign_in @my_user
     end
 
@@ -20,7 +20,7 @@ describe ChallengesController do
       end
 
       it 'populates an array of easy challenges' do
-        easy_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
+        easy_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Lorem.sentence, long_description: Faker::Lorem.sentence, difficulty: 'easy')
         get :easy
         expect(assigns(:easy)).to eq([easy_challenge])
       end
@@ -38,7 +38,7 @@ describe ChallengesController do
       end
 
       it 'populates an array of medium challenges' do
-        medium_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'medium')
+        medium_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Lorem.sentence, long_description: Faker::Lorem.sentence, difficulty: 'medium')
         get :medium
         expect(assigns(:medium)).to eq([medium_challenge])
       end
@@ -56,7 +56,7 @@ describe ChallengesController do
       end
 
       it 'populates an array of hard challenges' do
-        hard_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'hard')
+        hard_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Lorem.sentence, long_description: Faker::Lorem.sentence, difficulty: 'hard')
         get :hard
         expect(assigns(:hard)).to eq([hard_challenge])
       end
@@ -74,7 +74,7 @@ describe ChallengesController do
       end
 
       it 'populates an array of challenges' do
-        my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
+        my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Lorem.sentence, long_description: Faker::Lorem.sentence, difficulty: 'easy')
         get :index
         expect(assigns(:challenges)).to eq([my_challenge])
       end
@@ -82,7 +82,7 @@ describe ChallengesController do
 
     describe 'GET #show' do
       before(:each) do
-        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
+        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Lorem.sentence, long_description: Faker::Lorem.sentence, difficulty: 'easy')
       end
 
       it 'has a 200 status code' do
@@ -118,8 +118,8 @@ describe ChallengesController do
           expect {
             post :create, challenge: {
               name: Faker::App.name,
-              short_description: Faker::Hipster.sentence,
-              long_description: Faker::Hipster.sentence,
+              short_description: Faker::Lorem.sentence,
+              long_description: Faker::Lorem.sentence,
               difficulty: 'easy' }
           }.to change(Challenge, :count).by(1)
         end
@@ -127,8 +127,8 @@ describe ChallengesController do
         it 'redirects to the homepage' do
           post :create, challenge: {
             name: Faker::App.name,
-            short_description: Faker::Hipster.sentence,
-            long_description: Faker::Hipster.sentence,
+            short_description: Faker::Lorem.sentence,
+            long_description: Faker::Lorem.sentence,
             difficulty: 'easy' }
           expect(response).to redirect_to(root_path)
         end
@@ -139,8 +139,8 @@ describe ChallengesController do
           expect {
             post :create, challenge: {
               name: nil,
-              short_description: Faker::Hipster.sentence,
-              long_description: Faker::Hipster.sentence,
+              short_description: Faker::Lorem.sentence,
+              long_description: Faker::Lorem.sentence,
               difficulty: 'easy' }
           }.to_not change(Challenge, :count)
         end
@@ -148,8 +148,8 @@ describe ChallengesController do
         it 're-renders the :new template' do
           post :create, challenge: {
             name: nil,
-            short_description: Faker::Hipster.sentence,
-            long_description: Faker::Hipster.sentence,
+            short_description: Faker::Lorem.sentence,
+            long_description: Faker::Lorem.sentence,
             difficulty: 'easy' }
           expect(response).to render_template('new')
         end
@@ -158,7 +158,7 @@ describe ChallengesController do
 
     describe 'GET #edit' do
       before(:each) do
-        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
+        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Lorem.sentence, long_description: Faker::Lorem.sentence, difficulty: 'easy')
       end
 
       it 'has a 200 status code' do
@@ -176,7 +176,7 @@ describe ChallengesController do
       context 'current user does not own challenge' do
         before(:each) do
           sign_out @my_user
-          @other_user = User.create(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
+          @other_user = User.create(email: Faker::Internet.email, username: Faker::Internet.user_name, password: 'password', password_confirmation: 'password')
           sign_in @other_user
         end
 
@@ -194,7 +194,7 @@ describe ChallengesController do
 
     describe 'PUT #update' do
       before(:each) do
-        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
+        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Lorem.sentence, long_description: Faker::Lorem.sentence, difficulty: 'easy')
       end
 
       context 'with valid attributes' do
@@ -228,7 +228,7 @@ describe ChallengesController do
     describe 'DELETE #destroy' do
       context 'current user owns challenge' do
         before(:each) do
-          @my_challenge = @my_user.challenges.create!(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
+          @my_challenge = @my_user.challenges.create!(name: Faker::App.name, short_description: Faker::Lorem.sentence, long_description: Faker::Lorem.sentence, difficulty: 'easy')
         end
 
         it 'removes the challenge from the database' do
@@ -243,9 +243,9 @@ describe ChallengesController do
 
       context 'current user does not own challenge' do
         before(:each) do
-          @my_challenge = @my_user.challenges.create!(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
+          @my_challenge = @my_user.challenges.create!(name: Faker::App.name, short_description: Faker::Lorem.sentence, long_description: Faker::Lorem.sentence, difficulty: 'easy')
           sign_out @my_user
-          @other_user = User.create(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
+          @other_user = User.create(email: Faker::Internet.email, username: Faker::Internet.user_name, password: 'password', password_confirmation: 'password')
           sign_in @other_user
         end
 
@@ -274,8 +274,8 @@ describe ChallengesController do
       end
 
       it 'populates an array of challenges' do
-        my_user = User.create(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
-        my_challenge = my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
+        my_user = User.create(email: Faker::Internet.email, username: Faker::Internet.user_name, password: 'password', password_confirmation: 'password')
+        my_challenge = my_user.challenges.create(name: Faker::App.name, short_description: Faker::Lorem.sentence, long_description: Faker::Lorem.sentence, difficulty: 'easy')
 
         get :index
         expect(assigns(:challenges)).to eq([my_challenge])
@@ -284,8 +284,8 @@ describe ChallengesController do
 
     describe 'GET #show' do
       before(:each) do
-        @my_user = User.create(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
-        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Hipster.sentence, long_description: Faker::Hipster.sentence, difficulty: 'easy')
+        @my_user = User.create(email: Faker::Internet.email, username: Faker::Internet.user_name, password: 'password', password_confirmation: 'password')
+        @my_challenge = @my_user.challenges.create(name: Faker::App.name, short_description: Faker::Lorem.sentence, long_description: Faker::Lorem.sentence, difficulty: 'easy')
       end
 
       it 'has a 200 status code' do

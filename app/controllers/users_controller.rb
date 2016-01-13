@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def authorize
-    address = github.authorize_url scope: 'user, gist'
+    address = github.authorize_url scope: 'user:email, gist'
     redirect_to address
   end
 
@@ -12,8 +12,10 @@ class UsersController < ApplicationController
     github = Github.new oauth_token: current_user.github_token
     username = github.users.get.login
     avatar_url = github.users.get.avatar_url
-    current_user.update_attributes(username: username, avatar_url: avatar_url )
-    
+    email = github.users.get.email
+
+    current_user.update_attributes(email: email, username: username, avatar_url: avatar_url )
+
     redirect_to root_path
   end
 

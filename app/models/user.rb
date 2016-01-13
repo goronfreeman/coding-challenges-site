@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_many :challenges
   has_many :completed_challenges
   has_many :comments
+
+  validates :username, presence: true
 end
 
 # == Schema Information
