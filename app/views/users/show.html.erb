@@ -1,1 +1,9 @@
 <%= render 'tabs' %>
+
+<%= image_tag @user.image %>
+
+<h3><%= @user.username %></h3>
+
+<h4><%= @user.challenges.count %> challenges</h4>
+
+<h4><%= @user.comments.count %> comments</h4>

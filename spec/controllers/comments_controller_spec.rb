@@ -53,7 +53,7 @@ describe CommentsController do
       context 'current user owns comment' do
         it 'renders the :edit template' do
           get :edit, challenge_id: @my_challenge.id, id: @my_comment.id
-          expect(response).to render_template('edit')
+          expect(response).to render_template(:edit)
         end
       end
 
@@ -66,7 +66,7 @@ describe CommentsController do
 
         it 'does not render the :edit template' do
           get :edit, challenge_id: @my_challenge.id, id: @my_comment.id
-          expect(response).to_not render_template('edit')
+          expect(response).to_not render_template(:edit)
         end
 
         it 'redirect to challenge#show' do
@@ -104,7 +104,7 @@ describe CommentsController do
         it 're-renders the :edit template' do
           put :update, challenge_id: @my_challenge.id, id: @my_comment.id, comment: { body: nil }
           @my_comment.reload
-          expect(response).to render_template('edit')
+          expect(response).to render_template(:edit)
         end
       end
     end

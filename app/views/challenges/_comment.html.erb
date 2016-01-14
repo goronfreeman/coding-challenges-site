@@ -2,9 +2,9 @@
   <p class="tagline">
     <!-- TODO -->
     <% if @challenge.user_id == comment.user.id %>
-      <%= link_to comment.user.username, root_path, class: 'username challenge-owner' %>
+      <%= link_to comment.user.username, user_path(comment.user.username), class: 'username challenge-owner' %>
     <% else %>
-      <%= link_to comment.user.username, root_path, class: 'username' %>
+      <%= link_to comment.user.username, user_path(comment.user.username), class: 'username' %>
     <% end %>
 
     <span class="timestamp">

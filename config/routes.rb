@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   get 'user/:username/starred',   to: 'users#starred',    as: :user_starred
   get 'user/:username/completed', to: 'users#completed',  as: :user_completed
 
-  get 'challenges/easy',   to: 'challenges#easy'
-  get 'challenges/medium', to: 'challenges#medium'
-  get 'challenges/hard',   to: 'challenges#hard'
+  get 'challenges/easy',    to: 'challenges#easy'
+  get 'challenges/medium',  to: 'challenges#medium'
+  get 'challenges/hard',    to: 'challenges#hard'
 
   resources :challenges do
     resources :comments

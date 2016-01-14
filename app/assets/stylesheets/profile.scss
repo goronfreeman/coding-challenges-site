@@ -27,7 +27,9 @@ $purple: #9b4dca;
     align-items: center;
     display: inline-flex;
     height: 100%;
-    margin: 0;
+    // TODO
+    margin: 0 -5px 0 0;
+    //
     padding: 0 10px;
     transition: all 100ms ease-in-out;
 
@@ -63,6 +65,10 @@ $purple: #9b4dca;
   .tab5 {
     border-top: 2px solid $red;
   }
+
+  .active {
+    background: darken($purple, 5);
+  }
 }
 
 // Comments
@@ -77,6 +83,7 @@ $purple: #9b4dca;
   padding: 1rem;
   position: relative;
   top: 5.2rem;
+  z-index: -1;
 
   p {
     margin: 0;

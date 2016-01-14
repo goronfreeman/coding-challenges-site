@@ -1,9 +1,9 @@
 <nav class="profile-tabs">
   <ul>
-    <li class="tab1"><%= link_to 'profile', user_path(@user.username) %></li>
-    <li class="tab2"><%= link_to 'comments', user_comments_path(@user.username) %></li>
-    <li class="tab3"><%= link_to 'submitted', user_submitted_path(@user.username) %></li>
-    <li class="tab4"><%= link_to 'starred', user_starred_path(@user.username) %></li>
-    <li class="tab5"><%= link_to 'completed', user_completed_path(@user.username) %></li>
+    <li class="tab1 <%= add_active?(user_path(@user.username)) %>"><%= link_to 'profile', user_path(@user.username) %></li>
+    <li class="tab2 <%= add_active?(user_comments_path(@user.username)) %>"><%= link_to 'comments', user_comments_path(@user.username) %></li>
+    <li class="tab3 <%= add_active?(user_submitted_path(@user.username)) %>"><%= link_to 'submitted', user_submitted_path(@user.username) %></li>
+    <li class="tab4 <%= add_active?(user_starred_path(@user.username)) %>"><%= link_to 'starred', user_starred_path(@user.username) %></li>
+    <li class="tab5 <%= add_active?(user_completed_path(@user.username)) %>"><%= link_to 'completed', user_completed_path(@user.username) %></li>
   </ul>
 </nav>

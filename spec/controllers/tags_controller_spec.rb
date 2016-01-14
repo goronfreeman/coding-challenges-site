@@ -9,7 +9,7 @@ describe TagsController do
 
     it 'renders the :index template' do
       get :index
-      expect(response).to render_template('index')
+      expect(response).to render_template(:index)
     end
 
     it 'populates an array of tags' do
@@ -25,13 +25,13 @@ describe TagsController do
     end
 
     it 'has a 200 status code' do
-      get :show, id: @my_tag.id
+      get :show, name: @my_tag.name
       expect(response.status).to eq(200)
     end
 
     it 'renders the :show template' do
-      get :show, id: @my_tag.id
-      expect(response).to render_template('show')
+      get :show, name: @my_tag.name
+      expect(response).to render_template(:show)
     end
   end
 end

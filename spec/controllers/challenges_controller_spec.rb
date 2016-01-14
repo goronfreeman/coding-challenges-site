@@ -16,7 +16,7 @@ describe ChallengesController do
 
       it 'renders the :easy template' do
         get :easy
-        expect(response).to render_template('easy')
+        expect(response).to render_template(:easy)
       end
 
       it 'populates an array of easy challenges' do
@@ -34,7 +34,7 @@ describe ChallengesController do
 
       it 'renders the :medium template' do
         get :medium
-        expect(response).to render_template('medium')
+        expect(response).to render_template(:medium)
       end
 
       it 'populates an array of medium challenges' do
@@ -52,7 +52,7 @@ describe ChallengesController do
 
       it 'renders the :hard template' do
         get :hard
-        expect(response).to render_template('hard')
+        expect(response).to render_template(:hard)
       end
 
       it 'populates an array of hard challenges' do
@@ -70,7 +70,7 @@ describe ChallengesController do
 
       it 'renders the :index template' do
         get :index
-        expect(response).to render_template('index')
+        expect(response).to render_template(:index)
       end
 
       it 'populates an array of challenges' do
@@ -92,7 +92,7 @@ describe ChallengesController do
 
       it 'renders the :show template' do
         get :show, id: @my_challenge.id
-        expect(response).to render_template('show')
+        expect(response).to render_template(:show)
       end
     end
 
@@ -104,7 +104,7 @@ describe ChallengesController do
 
       it 'renders the :new template' do
         get :new
-        expect(response).to render_template('new')
+        expect(response).to render_template(:new)
       end
     end
 
@@ -151,7 +151,7 @@ describe ChallengesController do
             short_description: Faker::Lorem.sentence,
             long_description: Faker::Lorem.sentence,
             difficulty: 'easy' }
-          expect(response).to render_template('new')
+          expect(response).to render_template(:new)
         end
       end
     end
@@ -169,7 +169,7 @@ describe ChallengesController do
       context 'current user owns challenge' do
         it 'renders the :edit template' do
           get :edit, id: @my_challenge.id
-          expect(response).to render_template('edit')
+          expect(response).to render_template(:edit)
         end
       end
 
@@ -182,7 +182,7 @@ describe ChallengesController do
 
         it 'does not render the :edit template' do
           get :edit, id: @my_challenge.id
-          expect(response).to_not render_template('edit')
+          expect(response).to_not render_template(:edit)
         end
 
         it 'redirects to the home page' do
@@ -220,7 +220,7 @@ describe ChallengesController do
         it 're-renders the :edit template' do
           put :update, id: @my_challenge.id, challenge: { name: nil }
           @my_challenge.reload
-          expect(response).to render_template('edit')
+          expect(response).to render_template(:edit)
         end
       end
     end
@@ -270,7 +270,7 @@ describe ChallengesController do
 
       it 'renders the :index template' do
         get :index
-        expect(response).to render_template('index')
+        expect(response).to render_template(:index)
       end
 
       it 'populates an array of challenges' do
@@ -295,7 +295,7 @@ describe ChallengesController do
 
       it 'renders the :show template' do
         get :show, id: @my_challenge.id
-        expect(response).to render_template('show')
+        expect(response).to render_template(:show)
       end
     end
 

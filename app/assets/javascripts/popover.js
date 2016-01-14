@@ -1,11 +1,11 @@
-document.addEventListener('DOMContentLoaded', function() {
+$(function(){
   ;(function() {
 
     'use strict';
 
     var i,
       $popoverLinks = document.querySelectorAll('[data-popover]'),
-      $popovers = document.querySelectorAll('.popover'); // FIX HERE this needed to be a semicolon, not a comma.
+      $popovers = document.querySelectorAll('.popover');
 
     function init() {
       for (i = 0; i < $popoverLinks.length; i++) $popoverLinks[i].addEventListener('click', openPopover);

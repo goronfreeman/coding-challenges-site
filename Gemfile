@@ -29,6 +29,7 @@ gem 'faker', '~> 1.6', '>= 1.6.1'
 gem 'autoprefixer-rails'
 gem 'normalize-scss'
 gem 'omniauth-github'
+gem 'jquery-turbolinks'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
