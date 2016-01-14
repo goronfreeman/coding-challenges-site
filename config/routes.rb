@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'registrations' }
-
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks',
+                                    registrations: 'registrations' }
 
   root 'challenges#index'
 
-  # TODO
+  get 'user/:username',           to: 'users#show',       as: :user
+  get 'user/:username/comments',  to: 'users#comments',   as: :user_comments
+  get 'user/:username/submitted', to: 'users#submitted',  as: :user_submitted
+  get 'user/:username/starred',   to: 'users#starred',    as: :user_starred
+  get 'user/:username/completed', to: 'users#completed',  as: :user_completed
+
   get 'challenges/easy',   to: 'challenges#easy'
   get 'challenges/medium', to: 'challenges#medium'
   get 'challenges/hard',   to: 'challenges#hard'
@@ -13,19 +18,6 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  get 'user/:username', to: 'users#show', as: :user
-
-  get 'user/:username/comments',  to: 'users#comments', as: :user_comments
-  get 'user/:username/submitted', to: 'users#submitted', as: :user_submitted
-  get 'user/:username/starred',   to: 'users#starred', as: :user_starred
-  get 'user/:username/completed', to: 'users#completed', as: :user_completed
-
-  # resources :users, only: :show do
-  #   get 'comments',  to: 'users#comments'
-  #   get 'submitted', to: 'users#submitted'
-  #   get 'starred',   to: 'users#starred'
-  #   get 'completed', to: 'users#completed'
-  # end
-
-  resources :tags
+  get 'tag/:name', to: 'tags#show', as: :tag
+  resources :tags, only: :index
 end

@@ -4,6 +4,6 @@ class TagsController < ApplicationController
   end
 
   def show
-    @tag = Tag.find(params[:id])
+    @tag = Tag.find_by(name: params[:name])
   end
 end

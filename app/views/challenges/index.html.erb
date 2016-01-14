@@ -5,10 +5,9 @@
     <p><%= challenge.short_description %></p>
     <ul class="tags">
       <% challenge.tags.each do |tag| %>
-        <li><%= link_to tag.name, tag_path(tag) %></li>
+        <li><%= link_to tag.name, tag_path(tag.name) %></li>
       <% end %>
       <li class="tags">
-        <!-- TODO -->
         <%= link_to challenge.difficulty, 'challenges/' + challenge.difficulty %>
       </li>
   </ul>
