@@ -1,0 +1,35 @@
+<%= render 'tabs' %>
+
+<div class="user-comments">
+  <% @user.comments.each do |comment| %>
+    <p class="tagline">
+      <%= link_to comment.challenge.name, challenge_path(comment.challenge) %>
+      <span>by <%= link_to comment.challenge.user.username, user_path(comment.challenge.user) %></span>
+    </p>
+
+    <div class="comment">
+      <p class="tagline">
+        <%= link_to comment.user.username %>
+        <span class="timestamp">
+          <%= distance_of_time_in_words(Time.now, comment.created_at) %> ago
+        </span>
+      </p>
+
+      <p class="comment-body"><%= comment.body %></p>
+
+      <% if user_signed_in? %>
+        <ul class="comment-actions">
+          <!-- TODO -->
+          <li><a href="#">reply</a></li>
+          <li><a href="#">context</a></li>
+
+          <% if current_user.id == comment.user.id %>
+            <li><%= link_to 'edit', edit_challenge_comment_path(comment.challenge, comment) %></li>
+            <li><%= link_to 'delete', challenge_comment_path(comment.challenge, comment), method: :delete, data: {confirm: 'Really delete the comment?'} %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+
+  <% end %>
+</div>

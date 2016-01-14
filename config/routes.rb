@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'registrations' }
-  # devise_scope :user do
-  #   delete 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
-  # end
+
 
   root 'challenges#index'
 
@@ -15,7 +13,19 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  resources :users, only: :show
+  get 'user/:username', to: 'users#show', as: :user
+
+  get 'user/:username/comments',  to: 'users#comments', as: :user_comments
+  get 'user/:username/submitted', to: 'users#submitted', as: :user_submitted
+  get 'user/:username/starred',   to: 'users#starred', as: :user_starred
+  get 'user/:username/completed', to: 'users#completed', as: :user_completed
+
+  # resources :users, only: :show do
+  #   get 'comments',  to: 'users#comments'
+  #   get 'submitted', to: 'users#submitted'
+  #   get 'starred',   to: 'users#starred'
+  #   get 'completed', to: 'users#completed'
+  # end
 
   resources :tags
 end

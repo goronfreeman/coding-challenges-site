@@ -8,6 +8,26 @@ require 'rspec/rails'
 require 'devise'
 # Add additional requires below this line. Rails is not loaded until this point!
 
+# OmniAuth.config.test_mode = true
+# OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+#   provider: 'github',
+#   uid: '1234567',
+#   info: {
+#     email: 'test@test.com',
+#     nickname: 'testuser',
+#     image: 'https://avatars.githubusercontent.com/u/5210483?v=3'
+#     }
+#   })
+#
+#   OmniAuth.config.add_mock(:github, {
+#     uid: '1234567',
+#     info: {
+#       email: 'test@test.com',
+#       nickname: 'testuser',
+#       image: 'https://avatars.githubusercontent.com/u/5210483?v=3'
+#       }
+#   })
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end

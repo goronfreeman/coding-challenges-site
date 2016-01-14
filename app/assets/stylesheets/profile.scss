@@ -1,0 +1,84 @@
+$teal: #0fbfcf;
+$green: #9bcf2f;
+$blue: #49a7e9;
+$orange: #fab125;
+$red: #ff4500;
+$purple: #9b4dca;
+
+// Tabs
+
+.profile-tabs {
+  background: $purple;
+  font-family: "Gotham Rounded", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  height: 5.2rem;
+  left: 0;
+  margin-bottom: 1rem;
+  position: fixed;
+  width: 100%;
+
+  ul {
+    height: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    align-items: center;
+    display: inline-flex;
+    height: 100%;
+    margin: 0;
+    padding: 0 10px;
+    transition: all 100ms ease-in-out;
+
+    &:hover {
+      background: darken($purple, 5);
+    }
+  }
+
+  a {
+    color: #fff;
+    height: 100%;
+    list-style-type: none;
+    padding: 1.3rem 0;
+    text-align: center;
+  }
+
+  .tab1 {
+    border-top: 2px solid #fff;
+  }
+
+  .tab2 {
+    border-top: 2px solid $orange;
+  }
+
+  .tab3 {
+    border-top: 2px solid $green;
+  }
+
+  .tab4 {
+    border-top: 2px solid $blue;
+  }
+
+  .tab5 {
+    border-top: 2px solid $red;
+  }
+}
+
+// Comments
+
+.user-comments {
+  background-color: #fff;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, .1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1rem auto;
+  padding: 1rem;
+  position: relative;
+  top: 5.2rem;
+
+  p {
+    margin: 0;
+  }
+}

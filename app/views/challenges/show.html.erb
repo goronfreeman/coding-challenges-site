@@ -1,6 +1,6 @@
 <section class="challenge">
   <h3><%= @challenge.name %></h3>
-  
+
   <% if current_user.id == @challenge.user.id %>
     <ul class="challenge-actions">
       <li><%= link_to 'edit', edit_challenge_path(@challenge) %></li>
@@ -30,7 +30,7 @@
   <% if @challenge.comments.count == 0 %>
     <p>No Comments</p>
   <% else %>
-    <%= render partial: 'challenges/comment', collection: @challenge.comments %>
+    <%= render partial: 'comment', collection: @challenge.comments %>
   <% end %>
 
 </section>
