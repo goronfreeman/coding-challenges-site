@@ -15,6 +15,7 @@ $purple: #9b4dca;
   margin-bottom: 1rem;
   position: fixed;
   width: 100%;
+  z-index: 2;
 
   ul {
     height: 100%;
@@ -83,9 +84,38 @@ $purple: #9b4dca;
   padding: 1rem;
   position: relative;
   top: 5.2rem;
-  z-index: -1;
 
   p {
     margin: 0;
+  }
+}
+
+.post-owner {
+  font-size: 1.3rem;
+  margin-left: 3px;
+
+  a {
+    font-weight: bold;
+  }
+}
+
+// Profile
+
+.user-info-box {
+  background-color: #fff;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, .1);
+  float: left;
+  margin: 1rem auto;
+  padding: 1rem;
+  position: relative;
+  text-align: center;
+  top: 5.2rem;
+
+  h3 {
+    margin: 0;
+  }
+
+  img {
+    height: 200px;
   }
 }

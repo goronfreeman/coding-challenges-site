@@ -6,10 +6,15 @@
 @import 'devise';
 @import 'profile';
 
+$gray: #d1d1d1;
+$light-gray: #f4f5f6;
+$dark-gray: #606c76;
+$purple: #9b4dca;
+
 // Base
 
 body {
-  background-color: #f4f5f6;
+  background-color: $light-gray;
   margin-top: 5.2rem;
 }
 
@@ -32,8 +37,8 @@ body {
 // Navbar
 
 .navigation {
-  background: #f4f5f6;
-  border-bottom: .1rem solid #d1d1d1;
+  background: $light-gray;
+  border-bottom: .1rem solid $gray;
   display: block;
   height: 5.2rem;
   left: 0;
@@ -77,7 +82,7 @@ body {
 
 .navigation .title,
 .navigation-title {
-  color: #606c76;
+  color: $dark-gray;
   display: inline;
   font-family: "Gotham Rounded", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1.6rem;
@@ -95,7 +100,7 @@ body {
   text-decoration: none;
 
   &.active {
-    color: #606c76;
+    color: $dark-gray;
   }
 }
 
@@ -103,7 +108,7 @@ body {
 
 .popover {
   background: #fff;
-  border: .1rem solid #d1d1d1;
+  border: .1rem solid $gray;
   border-radius: .4rem;
   display: none;
   filter: drop-shadow(0 0 .6rem rgba(0, 0, 0, .1));
@@ -138,7 +143,7 @@ body {
 }
 
 .popover-item:first-child .popover-link::before {
-  border-bottom-color: #d1d1d1;
+  border-bottom-color: $gray;
   border-color: rgba(238, 238, 238, 0);
   border-width: 1.1rem;
   margin-left: -1.1rem;
@@ -156,8 +161,8 @@ body {
 }
 
 .popover-link {
-  border-bottom: 1rem solid #d1d1d1;
-  color: #606c76;
+  border-bottom: 1px solid $gray;
+  color: $dark-gray;
   display: block;
   font-size: 1.2rem;
   padding: .8rem 2rem;
@@ -176,11 +181,11 @@ body {
 }
 
 .popover-link:hover {
-  background: #9b4dca;
+  background: $purple;
   color: #fff;
 }
 
 .popover-link:hover,
 .popover-item:first-child .popover-link:hover::after {
-  border-bottom-color: #9b4dca;
+  border-bottom-color: $purple;
 }

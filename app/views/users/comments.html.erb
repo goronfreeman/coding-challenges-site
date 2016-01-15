@@ -4,12 +4,12 @@
   <% @user.comments.each do |comment| %>
     <p class="tagline">
       <%= link_to comment.challenge.name, challenge_path(comment.challenge) %>
-      <span>by <%= link_to comment.challenge.user.username, user_path(comment.challenge.user) %></span>
+      <span class="post-owner">by <%= link_to comment.challenge.user.username, user_path(comment.challenge.user.username) %></span>
     </p>
 
     <div class="comment">
       <p class="tagline">
-        <%= link_to comment.user.username %>
+        <%= link_to comment.user.username, user_path(comment.user.username) %>
         <span class="timestamp">
           <%= distance_of_time_in_words(Time.now, comment.created_at) %> ago
         </span>

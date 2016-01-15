@@ -1,3 +1,5 @@
+$blue: #49a7e9;
+
 .challenge,
 .challenge-form {
   align-items: center;
@@ -50,7 +52,7 @@
   padding: 0;
 
   a {
-    background: #0089e0;
+    background: $blue;
     border-bottom-right-radius: 4px;
     border-top-right-radius: 4px;
     color: #fff;
@@ -60,7 +62,7 @@
   }
 
   a::before {
-    border-color: transparent #0089e0 transparent transparent;
+    border-color: transparent $blue transparent transparent;
     border-style: solid;
     border-width: 12px 12px 12px 0;
     content: '';
@@ -85,11 +87,11 @@
   }
 
   a:hover {
-    background: #555;
+    background: darken($blue, 5);
   }
 
   a:hover::before {
-    border-color: transparent #555 transparent transparent;
+    border-color: transparent darken($blue, 5) transparent transparent;
   }
 }
 
