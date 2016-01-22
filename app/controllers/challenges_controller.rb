@@ -4,15 +4,15 @@ class ChallengesController < ApplicationController
 
   # Actions for difficulty index pages
   def easy
-    @easy = Challenge.where("difficulty = 0")
+    @easy = Challenge.where('difficulty = 0')
   end
 
   def medium
-    @medium = Challenge.where("difficulty = 1")
+    @medium = Challenge.where('difficulty = 1')
   end
 
   def hard
-    @hard = Challenge.where("difficulty = 2")
+    @hard = Challenge.where('difficulty = 2')
   end
 
   # Standard actions
@@ -27,6 +27,7 @@ class ChallengesController < ApplicationController
 
   def new
     @challenge = current_user.challenges.build
+    @challenge_tags = @challenge.challenge_tags.build
   end
 
   def create
@@ -40,6 +41,7 @@ class ChallengesController < ApplicationController
   end
 
   def edit
+    @challenge_tags = @challenge.challenge_tags.build
     redirect_to root_path unless @challenge.user_id == current_user.id
   end
 
@@ -59,7 +61,9 @@ class ChallengesController < ApplicationController
   private
 
   def challenge_params
-    params.require(:challenge).permit(:name, :short_description, :long_description, :user_id, :difficulty)
+    params.require(:challenge).permit(:name, :short_description,
+                                      :long_description, :user_id, :difficulty,
+                                      challenge_tags_attributes: [:tag_id])
   end
 
   def find_challenge

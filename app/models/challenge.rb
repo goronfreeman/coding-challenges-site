@@ -3,11 +3,14 @@ class Challenge < ActiveRecord::Base
 
   belongs_to :user
   has_many :user_completions, class_name: 'CompletedChallenge'
+
   has_many :challenge_tags
   has_many :tags, through: :challenge_tags
+  accepts_nested_attributes_for :challenge_tags, allow_destroy: true
+
   has_many :comments, dependent: :destroy
 
-  validates :name, :short_description, :long_description, :user_id, :difficulty, presence: true
+  validates :name, :short_description, :long_description, :user_id, :difficulty, :challenge_tags, presence: true
 end
 
 # == Schema Information
