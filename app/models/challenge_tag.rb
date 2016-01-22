@@ -2,7 +2,8 @@ class ChallengeTag < ActiveRecord::Base
   belongs_to :challenge
   belongs_to :tag
 
-  validates :challenge_id, :tag_id, presence: true
+  validates :tag_id, presence: true
+  validates :tag_id, uniqueness: true
 end
 
 # == Schema Information

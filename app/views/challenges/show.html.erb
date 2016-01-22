@@ -1,7 +1,7 @@
 <section class="challenge">
   <h3><%= @challenge.name %></h3>
 
-  <% if current_user.id == @challenge.user.id %>
+  <% if current_user && current_user.id == @challenge.user.id %>
     <ul class="challenge-actions">
       <li><%= link_to 'edit', edit_challenge_path(@challenge) %></li>
       <li><%= link_to 'delete', challenge_path(@challenge), method: :delete, data: {confirm: 'Really delete the challenge?'} %></li>
