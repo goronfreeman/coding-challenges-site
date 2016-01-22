@@ -61,9 +61,10 @@ class ChallengesController < ApplicationController
   private
 
   def challenge_params
-    params.require(:challenge).permit(:name, :short_description,
-                                      :long_description, :user_id, :difficulty,
-                                      challenge_tags_attributes: [:tag_id])
+    params.require(:challenge).permit(
+      :name, :short_description, :long_description, :user_id, :difficulty,
+      challenge_tags_attributes: [:tag_id]
+    )
   end
 
   def find_challenge
