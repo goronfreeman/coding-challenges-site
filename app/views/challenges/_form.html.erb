@@ -8,7 +8,7 @@
   <%= f.select(:difficulty, Challenge.difficulties.keys.map {|difficulty| [difficulty]}, prompt: 'Select a difficulty') %>
 
   <%= f.fields_for :challenge_tags do |tag| %>
-    <%= tag.collection_select(:tag_id, Tag.all, :id, :name, {}, multiple: true, prompt: 'Select a tag', class: 'chosen-select') %>
+    <%= tag.collection_select(:tag_id, Tag.all, :id, :name, prompt: 'Select a tag') %>
   <% end %>
 
   <%= f.submit 'Submit' %>

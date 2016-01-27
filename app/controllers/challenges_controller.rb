@@ -31,8 +31,6 @@ class ChallengesController < ApplicationController
   end
 
   def create
-    testing = params[:challenge][:challenge_tags_attributes].values.first.first.second.drop(1)
-    puts "THIS IS #{testing}"
     @challenge = current_user.challenges.build(challenge_params)
 
     if @challenge.save
@@ -43,7 +41,9 @@ class ChallengesController < ApplicationController
   end
 
   def edit
+    # Uncomment to add new tag select in edit view
     # @challenge_tags = @challenge.challenge_tags.build
+
     redirect_to root_path unless @challenge.user_id == current_user.id
   end
 
