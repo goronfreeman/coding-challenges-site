@@ -1,0 +1,51 @@
+<main class='wrapper'>
+  <nav class='navigation'>
+    <section class='container'>
+      <%= image_tag('logo.svg', height: '30', class: 'img', alt: 'coding_challenges') %>
+      <h1 class='title'><%= link_to 'coding challenges', root_path, class: 'navigation-title' %></h1>
+
+      <ul class='navigation-list float-right'>
+
+        <% if user_signed_in? %>
+          <li class='navigation-item'>
+            <a href='#popover-grid' class='navigation-link' data-popover>
+
+              <% if current_user.image %>
+                <%= image_tag current_user.image, class: 'img' %>
+              <% else %>
+                <i class='material-icons img'>account_circle</i>
+              <% end %>
+
+              <%= current_user.username %>
+            </a>
+
+            <div class='popover' id='popover-grid'>
+              <ul class='popover-list'>
+                <li class='popover-item'>
+                  <%= link_to 'Profile', user_path(current_user.username), class: 'popover-link' %>
+                </li>
+
+                <li class='popover-item'>
+                  <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'popover-link' %>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+        <% else %>
+          <li class='navigation-item'>
+            <%= link_to 'Sign up', new_user_registration_path, class: 'button button-outline' %>
+          </li>
+
+          <li class='navigation-item'>
+            <%= link_to 'Sign in with GitHub', user_omniauth_authorize_path(:github), class: 'button button-outline' %>
+          </li>
+
+          <li class="navigation-item">
+            <%= link_to 'Log in', new_user_session_path, class: 'button button-outline' %>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  </nav>
+</main>
