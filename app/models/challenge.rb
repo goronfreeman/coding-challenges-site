@@ -12,6 +12,7 @@ class Challenge < ActiveRecord::Base
 
   validates :name, :short_description, :long_description, :user_id, :difficulty,
             :challenge_tags, presence: true
+  validates :name, :short_description, :long_description, uniqueness: true
 end
 
 # == Schema Information

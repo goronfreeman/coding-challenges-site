@@ -10,7 +10,8 @@ describe ChallengeTag do
       password_confirmation: 'password'
     )
 
-    @tag = Tag.create(name: 'CSS')
+    @tag_one = Tag.create(name: 'CSS')
+    @tag_two = Tag.create(name: 'API')
 
     @challenge = @user.challenges.create!(
       name: Faker::App.name,
@@ -18,14 +19,14 @@ describe ChallengeTag do
       long_description: Faker::Lorem.sentence,
       difficulty: 'easy',
       challenge_tags_attributes: [
-        { tag_id: @tag.id }
+        { tag_id: @tag_one.id }
       ]
     )
   end
 
   describe 'validations' do
     it 'is valid with all required fields' do
-      challenge_tag = @challenge.challenge_tags.create(tag_id: @tag.id)
+      challenge_tag = @challenge.challenge_tags.create(tag_id: @tag_two.id)
       expect(challenge_tag).to be_valid
     end
 

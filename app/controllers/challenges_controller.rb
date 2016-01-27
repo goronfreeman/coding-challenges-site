@@ -31,6 +31,8 @@ class ChallengesController < ApplicationController
   end
 
   def create
+    testing = params[:challenge][:challenge_tags_attributes].values.first.first.second.drop(1)
+    puts "THIS IS #{testing}"
     @challenge = current_user.challenges.build(challenge_params)
 
     if @challenge.save
@@ -41,7 +43,7 @@ class ChallengesController < ApplicationController
   end
 
   def edit
-    @challenge_tags = @challenge.challenge_tags.build
+    # @challenge_tags = @challenge.challenge_tags.build
     redirect_to root_path unless @challenge.user_id == current_user.id
   end
 
@@ -63,7 +65,7 @@ class ChallengesController < ApplicationController
   def challenge_params
     params.require(:challenge).permit(
       :name, :short_description, :long_description, :user_id, :difficulty,
-      challenge_tags_attributes: [:tag_id]
+      challenge_tags_attributes: [:id, :tag_id]
     )
   end
 
