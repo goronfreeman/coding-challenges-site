@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    # TODO: redirect back to user profile if editing from that page
     redirect_to challenge_path(@challenge) unless @comment.user_id == current_user.id
   end
 
@@ -28,6 +29,7 @@ class CommentsController < ApplicationController
     if @comment.user_id == current_user.id
       @comment.update_attribute :body, '[deleted]'
     end
+    # TODO: redirect back to user profile if deleting from that page
     redirect_to challenge_path(@challenge)
   end
 
