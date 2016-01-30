@@ -1,11 +1,7 @@
 <div class='comment'>
   <p class='comment__tagline'>
-    <!-- TODO -->
-    <% if @challenge.user_id == comment.user.id %>
-      <%= link_to comment.user.username, user_path(comment.user.username), class: 'username challenge-owner' %>
-    <% else %>
-      <%= link_to comment.user.username, user_path(comment.user.username), class: 'username' %>
-    <% end %>
+
+  <%= link_to comment.user.username, user_path(comment.user.username), class: "username #{'challenge-owner' if challenge.user_id == comment.user.id}" %>
 
     <span class='timestamp'>
       <%= distance_of_time_in_words(Time.now, comment.created_at) %> ago
@@ -20,12 +16,13 @@
 
     <% if user_signed_in? %>
       <ul class='actions'>
-        <!-- TODO -->
+        <!-- TODO: add comment replying and context -->
         <li><a href='#'>reply</a></li>
+        <!-- <li><a href='#'>context</a></li> -->
 
         <% if owns_content?(comment) %>
-          <li><%= link_to 'edit', edit_challenge_comment_path(@challenge, comment) %></li>
-          <li><%= link_to 'delete', challenge_comment_path(@challenge, comment), method: :delete, data: {confirm: 'Really delete the comment?'} %></li>
+          <li><%= link_to 'edit', edit_challenge_comment_path(challenge, comment) %></li>
+          <li><%= link_to 'delete', challenge_comment_path(challenge, comment), method: :delete, data: { confirm: 'Really delete the comment?' } %></li>
         <% end %>
       </ul>
     <% end %>

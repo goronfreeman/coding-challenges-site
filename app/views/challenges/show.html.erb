@@ -28,7 +28,7 @@
   <% if @challenge.comments.empty? %>
     <p>No Comments</p>
   <% else %>
-    <%= render partial: 'comment', collection: @challenge.comments %>
+    <%= render partial: 'comment', locals: {challenge: @challenge}, collection: @challenge.comments %>
   <% end %>
 </section>
 
