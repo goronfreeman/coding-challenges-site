@@ -2,13 +2,85 @@
 @import 'milligram';
 @import 'bootstrap';
 @import 'variables';
+
 @import 'navbar';
 @import 'challenges';
 @import 'comments';
-@import 'devise';
 @import 'profile';
 
+// Base
 body {
   background-color: $light-gray;
   margin-top: 6.2rem;
+}
+
+hr {
+  background: #eee;
+  height: .1rem;
+  margin: 1rem;
+}
+
+// Forms
+// TODO separate challenge and comments from form CSS
+
+.form,
+.challenge,
+.comments {
+  background-color: $white;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, .1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1rem auto;
+  padding: 1rem;
+
+  h3 {
+    font-size: 2.3rem;
+    margin: 0;
+  }
+}
+
+.challenge,
+.form--challenge {
+  align-items: center;
+}
+
+.form--auth {
+  .remember {
+    label {
+      color: #999;
+      display: inline;
+      font-size: 1.2rem;
+      font-weight: normal;
+    }
+
+    input[type='checkbox'] {
+      display: inline;
+    }
+
+    a {
+      font-size: 1.2rem;
+      font-weight: normal;
+    }
+  }
+
+  input[type='submit'] {
+    display: block;
+  }
+}
+
+.actions {
+  list-style: none;
+
+  li {
+    float: left;
+    font: {
+      size: 1.2rem;
+      weight: bold;
+    }
+
+    &:not(:first-child) {
+      margin-left: 1.5rem;
+    }
+  }
 }

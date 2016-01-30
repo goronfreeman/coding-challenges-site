@@ -1,15 +1,7 @@
-$teal: #0fbfcf;
-$green: #9bcf2f;
-$blue: #49a7e9;
-$orange: #fab125;
-$red: #ff4500;
-$purple: #9b4dca;
-
 // Tabs
-
 .profile-tabs {
   background: $purple;
-  font-family: "Gotham Rounded", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   height: 5.2rem;
   left: 0;
   margin-bottom: 1rem;
@@ -29,9 +21,7 @@ $purple: #9b4dca;
     align-items: center;
     display: inline-flex;
     height: 100%;
-    // TODO
-    margin: 0 -5px 0 0;
-    //
+    margin: 0 -5px 0 0; // TODO
     padding: 0 10px;
     transition: all 100ms ease-in-out;
 
@@ -41,7 +31,7 @@ $purple: #9b4dca;
   }
 
   a {
-    color: #fff;
+    color: $white;
     height: 100%;
     list-style-type: none;
     padding: 1.3rem 0;
@@ -49,7 +39,7 @@ $purple: #9b4dca;
   }
 
   .tab1 {
-    border-top: 2px solid #fff;
+    border-top: 2px solid $white;
   }
 
   .tab2 {
@@ -74,9 +64,8 @@ $purple: #9b4dca;
 }
 
 // Comments
-
 .user-comments {
-  background-color: #fff;
+  background-color: $white;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, .1);
   display: flex;
   flex-direction: column;
@@ -101,9 +90,8 @@ $purple: #9b4dca;
 }
 
 // Profile
-
 .user-info-box {
-  background-color: #fff;
+  background-color: $white;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, .1);
   float: left;
   margin: 1rem auto;

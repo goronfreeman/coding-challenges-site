@@ -1,10 +1,10 @@
-<section class="challenge">
+<section class='challenge'>
   <h3><%= @challenge.name %></h3>
 
-  <% if current_user && current_user.id == @challenge.user.id %>
-    <ul class="challenge-actions">
+  <% if user_signed_in? && owns_content?(@challenge) %>
+    <ul class='actions'>
       <li><%= link_to 'edit', edit_challenge_path(@challenge) %></li>
-      <li><%= link_to 'delete', challenge_path(@challenge), method: :delete, data: {confirm: 'Really delete the challenge?'} %></li>
+      <li><%= link_to 'delete', challenge_path(@challenge), method: :delete, data: { confirm: 'Really delete the challenge?' } %></li>
     </ul>
   <% end %>
 
@@ -12,31 +12,29 @@
 
   <p><%= @challenge.short_description %></p>
   <p><%= @challenge.long_description %></p>
-  <ul class="tags">
-    <li class="tags">
-      <!-- TODO -->
-      <%= link_to @challenge.difficulty, @challenge.difficulty %>
-    </li>
+
+  <ul class='challenge__tags'>
+    <li><%= link_to @challenge.difficulty, @challenge.difficulty %></li>
+
     <% @challenge.tags.each do |tag| %>
       <li><%= link_to tag.name, tag_path(tag.name) %></li>
     <% end %>
   </ul>
 </section>
 
-<section class="comments">
+<section class='comments'>
   <h3>Comments</h3>
   <hr>
 
-  <% if @challenge.comments.count == 0 %>
+  <% if @challenge.comments.empty? %>
     <p>No Comments</p>
   <% else %>
     <%= render partial: 'comment', collection: @challenge.comments %>
   <% end %>
-
 </section>
 
 <% if user_signed_in? %>
-  <section class="comments-form">
+  <section class='form'>
     <h3>Post a Comment</h3>
     <hr>
     <%= render partial: 'comments/form' %>

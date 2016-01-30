@@ -1,29 +1,29 @@
 <%= render 'tabs' %>
 
-<div class="user-comments">
+<div class='user-comments'>
   <% @user.comments.each do |comment| %>
-    <p class="tagline">
+    <p class='comment__tagline'>
       <%= link_to comment.challenge.name, challenge_path(comment.challenge) %>
-      <span class="post-owner">by <%= link_to comment.challenge.user.username, user_path(comment.challenge.user.username) %></span>
+      <span class='post-owner'>by <%= link_to comment.challenge.user.username, user_path(comment.challenge.user.username) %></span>
     </p>
 
-    <div class="comment">
-      <p class="tagline">
+    <div class='comment'>
+      <p class='comment__tagline'>
         <%= link_to comment.user.username, user_path(comment.user.username) %>
-        <span class="timestamp">
+        <span class='timestamp'>
           <%= distance_of_time_in_words(Time.now, comment.created_at) %> ago
         </span>
       </p>
 
-      <p class="comment-body"><%= comment.body %></p>
+      <p class='comment__body'><%= comment.body %></p>
 
       <% if user_signed_in? %>
-        <ul class="comment-actions">
+        <ul class='actions'>
           <!-- TODO -->
-          <li><a href="#">reply</a></li>
-          <li><a href="#">context</a></li>
+          <li><a href='#'>reply</a></li>
+          <li><a href='#'>context</a></li>
 
-          <% if current_user.id == comment.user.id %>
+          <% if owns_content?(comment) %>
             <li><%= link_to 'edit', edit_challenge_comment_path(comment.challenge, comment) %></li>
             <li><%= link_to 'delete', challenge_comment_path(comment.challenge, comment), method: :delete, data: {confirm: 'Really delete the comment?'} %></li>
           <% end %>

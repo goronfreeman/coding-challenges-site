@@ -1,5 +1,5 @@
-<div class="comment">
-  <p class="tagline">
+<div class='comment'>
+  <p class='comment__tagline'>
     <!-- TODO -->
     <% if @challenge.user_id == comment.user.id %>
       <%= link_to comment.user.username, user_path(comment.user.username), class: 'username challenge-owner' %>
@@ -7,7 +7,7 @@
       <%= link_to comment.user.username, user_path(comment.user.username), class: 'username' %>
     <% end %>
 
-    <span class="timestamp">
+    <span class='timestamp'>
       <%= distance_of_time_in_words(Time.now, comment.created_at) %> ago
       <% if comment.created_at != comment.updated_at %>
       * (last edited <%= distance_of_time_in_words(Time.now, comment.updated_at) %> ago)
@@ -16,13 +16,14 @@
 
   </p>
 
-  <p class="comment-body"><%= comment.body %></p>
+  <p class='comment__body'><%= comment.body %></p>
 
     <% if user_signed_in? %>
-      <ul class="comment-actions">
-        <li><a href="#">reply</a></li>
+      <ul class='actions'>
+        <!-- TODO -->
+        <li><a href='#'>reply</a></li>
 
-        <% if current_user.id == comment.user.id %>
+        <% if owns_content?(comment) %>
           <li><%= link_to 'edit', edit_challenge_comment_path(@challenge, comment) %></li>
           <li><%= link_to 'delete', challenge_comment_path(@challenge, comment), method: :delete, data: {confirm: 'Really delete the comment?'} %></li>
         <% end %>

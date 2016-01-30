@@ -1,70 +1,32 @@
-.comments,
-.comments-form {
-  background-color: #fff;
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, .1);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 1rem auto;
-  padding: 1rem;
-
-  h3 {
-    font-size: 2.3rem;
-    margin: 0;
-  }
-
-  hr {
-    background: #eee;
-    height: .1rem;
-    margin: 1rem;
-  }
-}
-
 .comment {
   background-color: #fefefe;
   border: 1px solid #eee;
   margin-bottom: 1rem;
   padding: 1rem;
+}
 
-  .tagline {
-    margin-bottom: 0;
+.comment__body {
+  margin-bottom: .5rem;
+  margin-top: .5rem;
+}
 
-    .username {
-      font-size: 1.3rem;
-      font-weight: bold;
-    }
+.comment__tagline {
+  margin-bottom: 0;
 
-    .challenge-owner {
-      background-color: #8a57a3;
-      border-radius: 3px;
-      color: #fff;
-      padding: 1px 5px;
-    }
-
-    .timestamp {
-      color: #999;
-      font-size: 1.3rem;
-    }
+  .username {
+    font-size: 1.3rem;
+    font-weight: bold;
   }
 
-  .comment-body {
-    margin-bottom: .5rem;
-    margin-top: .5rem;
+  .challenge-owner {
+    background-color: $purple;
+    border-radius: 3px;
+    color: $white;
+    padding: 1px 5px;
   }
 
-  .comment-actions {
-    list-style: none;
-
-    li {
-      float: left;
-      font: {
-        size: 1.2rem;
-        weight: bold;
-      }
-
-      &:not(:first-child) {
-        margin-left: 1.5rem;
-      }
-    }
+  .timestamp {
+    color: #999;
+    font-size: 1.3rem;
   }
 }

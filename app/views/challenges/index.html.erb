@@ -1,16 +1,18 @@
 <% @challenges.each do |challenge| %>
-  <section class="challenge">
+  <section class='challenge'>
     <h3><%= link_to challenge.name, challenge_path(challenge) %></h3>
+
     <hr>
+
     <p><%= challenge.short_description %></p>
-    <ul class="tags">
+
+    <ul class='challenge__tags'>
       <% challenge.tags.each do |tag| %>
         <li><%= link_to tag.name, tag_path(tag.name) %></li>
       <% end %>
-      <li class="tags">
-        <%= link_to challenge.difficulty, 'challenges/' + challenge.difficulty %>
-      </li>
-  </ul>
+
+      <li><%= link_to challenge.difficulty, eval("challenges_#{challenge.difficulty}_path") %></li>
+    </ul>
   </section>
 <% end %>
 
