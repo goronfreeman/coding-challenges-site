@@ -11,7 +11,7 @@
         <li><%= link_to tag.name, tag_path(tag.name) %></li>
       <% end %>
 
-      <li><%= link_to challenge.difficulty, eval("challenges_#{challenge.difficulty}_path") %></li>
+      <li><%= link_to challenge.difficulty, url_for([:challenges, challenge.difficulty]) %></li>
     </ul>
   </section>
 <% end %>
