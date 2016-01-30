@@ -369,6 +369,108 @@ describe ChallengesController do
       @my_tag = Tag.create(name: 'CSS')
     end
 
+    describe 'GET #easy' do
+      it 'has a 200 status code' do
+        get :easy
+        expect(response.status).to eq(200)
+      end
+
+      it 'renders the :easy template' do
+        get :easy
+        expect(response).to render_template(:easy)
+      end
+
+      it 'populates an array of easy challenges' do
+        my_user = User.create(
+          email: Faker::Internet.email,
+          username: Faker::Internet.user_name,
+          password: 'password',
+          password_confirmation: 'password'
+        )
+
+        my_challenge = my_user.challenges.create(
+          name: Faker::App.name,
+          short_description: Faker::Lorem.sentence,
+          long_description: Faker::Lorem.sentence,
+          difficulty: 'easy',
+          challenge_tags_attributes: [
+            { tag_id: @my_tag.id }
+          ]
+        )
+
+        get :easy
+        expect(assigns(:easy)).to eq([my_challenge])
+      end
+    end
+
+    describe 'GET #medium' do
+      it 'has a 200 status code' do
+        get :medium
+        expect(response.status).to eq(200)
+      end
+
+      it 'renders the :medium template' do
+        get :medium
+        expect(response).to render_template(:medium)
+      end
+
+      it 'populates an array of medium challenges' do
+        my_user = User.create(
+          email: Faker::Internet.email,
+          username: Faker::Internet.user_name,
+          password: 'password',
+          password_confirmation: 'password'
+        )
+
+        my_challenge = my_user.challenges.create(
+          name: Faker::App.name,
+          short_description: Faker::Lorem.sentence,
+          long_description: Faker::Lorem.sentence,
+          difficulty: 'medium',
+          challenge_tags_attributes: [
+            { tag_id: @my_tag.id }
+          ]
+        )
+
+        get :medium
+        expect(assigns(:medium)).to eq([my_challenge])
+      end
+    end
+
+    describe 'GET #hard' do
+      it 'has a 200 status code' do
+        get :hard
+        expect(response.status).to eq(200)
+      end
+
+      it 'renders the :hard template' do
+        get :hard
+        expect(response).to render_template(:hard)
+      end
+
+      it 'populates an array of hard challenges' do
+        my_user = User.create(
+          email: Faker::Internet.email,
+          username: Faker::Internet.user_name,
+          password: 'password',
+          password_confirmation: 'password'
+        )
+
+        my_challenge = my_user.challenges.create(
+          name: Faker::App.name,
+          short_description: Faker::Lorem.sentence,
+          long_description: Faker::Lorem.sentence,
+          difficulty: 'hard',
+          challenge_tags_attributes: [
+            { tag_id: @my_tag.id }
+          ]
+        )
+
+        get :hard
+        expect(assigns(:hard)).to eq([my_challenge])
+      end
+    end
+
     describe 'GET #index' do
       it 'has a 200 status code' do
         get :index
