@@ -1,4 +1,4 @@
-<div class="form form--auth">
+<div class='form form--auth'>
   <h3>Sign up</h3>
   <hr>
 
@@ -9,16 +9,16 @@
 
     <%= f.text_field :username, placeholder: 'choose a username' %>
 
-    <%= f.password_field :password, autocomplete: "off", placeholder: 'password' %>
+    <%= f.password_field :password, autocomplete: 'off', placeholder: 'password' %>
 
-    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'verify password' %>
+    <%= f.password_field :password_confirmation, autocomplete: 'off', placeholder: 'verify password' %>
 
-    <%= f.submit "Sign up" %>
+    <%= f.submit 'Sign up' %>
   <% end %>
 
   <hr>
-  <div class="login-footer">
+  <div class='login-footer'>
     Already have an account?
-    <%= render "devise/shared/links" %>
+    <%= render 'devise/shared/links' %>
   </div>
 </div>
