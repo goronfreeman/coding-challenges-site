@@ -1,9 +1,5 @@
-<h1>Challenges Tagged with <%= @tag.name %></h1>
-
-<ul>
-  <% @tag.challenges.each do |challenge| %>
-    <li>
-      <%= link_to challenge.name, challenge_path(challenge) %>
-    </li>
-  <% end %>
-</ul>
+<% if @tag.challenges.empty? %>
+  <p>No challenges tagged with <%= @tag.name %></p>
+<% else %>
+  <%= render partial: 'challenges/challenge', locals: { challenges: @tag.challenges } %>
+<% end %>
