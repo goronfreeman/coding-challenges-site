@@ -58,4 +58,5 @@ group :development do
   gem 'better_errors'
   gem 'pry-rails'
   gem 'quiet_assets'
+  gem 'terminal-notifier-guard', git: 'git@github.com:/goronfreeman/terminal-notifier-guard.git'
 end
