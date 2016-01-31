@@ -1,8 +1,8 @@
 # Create tag list
 tags = [
-  'Accessibility', 'API', 'Auth & Service', 'CMS', 'CSS', 'Database',
-  'Environments & Server', 'Git', 'JavaScript', 'Misc', 'Mobile/Hybrid',
-  'PHP', 'Task Runners', 'Terminal/Shell'
+  'accessibility', 'api', 'auth & service', 'cms', 'css', 'database',
+  'environments & server', 'git', 'javascript', 'misc', 'mobile/hybrid',
+  'php', 'task runners', 'terminal/shell'
 ]
 
 tags.each do |tag|
