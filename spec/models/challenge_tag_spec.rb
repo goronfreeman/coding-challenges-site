@@ -10,8 +10,8 @@ describe ChallengeTag do
       password_confirmation: 'password'
     )
 
-    @tag_one = Tag.create(name: 'CSS')
-    @tag_two = Tag.create(name: 'API')
+    @tag_one = Tag.create(name: 'css')
+    @tag_two = Tag.create(name: 'api')
 
     @challenge = @user.challenges.create!(
       name: Faker::App.name,

@@ -10,7 +10,7 @@ describe CompletedChallenge do
       password_confirmation: 'password'
     )
 
-    @tag = Tag.create(name: 'CSS')
+    @tag = Tag.create(name: 'css')
 
     @challenge = @user.challenges.create!(
       name: Faker::App.name,

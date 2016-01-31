@@ -10,7 +10,7 @@ describe Challenge do
       password_confirmation: 'password'
     )
 
-    @my_tag = Tag.create(name: 'CSS')
+    @my_tag = Tag.create(name: 'css')
   end
 
   describe 'validations' do

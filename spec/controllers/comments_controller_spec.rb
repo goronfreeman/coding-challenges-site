@@ -12,7 +12,7 @@ describe CommentsController do
       )
 
       sign_in @my_user
-      @my_tag = Tag.create(name: 'CSS')
+      @my_tag = Tag.create(name: 'css')
 
       @my_challenge = @my_user.challenges.create(
         name: Faker::App.name,

@@ -13,7 +13,7 @@ describe TagsController do
     end
 
     it 'populates an array of tags' do
-      my_tag = Tag.create(name: 'CSS')
+      my_tag = Tag.create(name: 'css')
       get :index
       expect(assigns(:tags)).to eq([my_tag])
     end
@@ -21,7 +21,7 @@ describe TagsController do
 
   describe 'GET #show' do
     before(:each) do
-      @my_tag = Tag.create(name: 'CSS')
+      @my_tag = Tag.create(name: 'css')
     end
 
     it 'has a 200 status code' do

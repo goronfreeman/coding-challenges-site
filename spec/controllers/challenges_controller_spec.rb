@@ -11,7 +11,7 @@ describe ChallengesController do
         password_confirmation: 'password'
       )
       sign_in @my_user
-      @my_tag = Tag.create(name: 'CSS')
+      @my_tag = Tag.create(name: 'css')
     end
 
     describe 'GET #easy' do
@@ -366,7 +366,7 @@ describe ChallengesController do
 
   context 'user is logged out' do
     before(:each) do
-      @my_tag = Tag.create(name: 'CSS')
+      @my_tag = Tag.create(name: 'css')
     end
 
     describe 'GET #easy' do
