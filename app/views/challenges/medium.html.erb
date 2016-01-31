@@ -1,3 +1,5 @@
-<h1>Medium Challenges</h1>
-
-<%= render partial: 'difficulty', locals: {difficulty: @medium} %>
+<% if @medium.empty? %>
+  <p>No medium challenges</p>
+<% else %>
+  <%= render partial: 'challenges/challenge', locals: { challenges: @medium } %>
+<% end %>

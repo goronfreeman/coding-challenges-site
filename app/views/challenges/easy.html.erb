@@ -1,3 +1,5 @@
-<h1>Easy Challenges</h1>
-
-<%= render partial: 'difficulty', locals: {difficulty: @easy} %>
+<% if @easy.empty? %>
+  <p>No easy challenges</p>
+<% else %>
+  <%= render partial: 'challenges/challenge', locals: { challenges: @easy } %>
+<% end %>
