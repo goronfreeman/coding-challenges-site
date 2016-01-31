@@ -10,6 +10,8 @@
 
     <%= f.text_field :username, placeholder: 'choose a username' %>
 
+    <%= f.url_field :image, placeholder: 'enter the url to your profile picture' %>
+
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
     <% end %>
