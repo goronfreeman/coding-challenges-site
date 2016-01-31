@@ -84,3 +84,13 @@ hr {
     }
   }
 }
+
+.button--github {
+  background: #444;
+  background-image: image-url('github-mark.png');
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  background-size: auto 3rem;
+  border: 0;
+  padding-left: 5rem;
+}
