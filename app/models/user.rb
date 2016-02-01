@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:github]
 
+  before_save :nilify_blanks
+
   has_many :challenges
   has_many :completed_challenges
   has_many :comments
@@ -12,7 +14,7 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
+      user.password = Devise.friendly_token[0, 20]
       user.username = auth.info.nickname
       user.image = auth.info.image
     end
@@ -24,6 +26,14 @@ class User < ActiveRecord::Base
         user.email = data['email'] if user.email.blank?
       end
     end
+  end
+end
+
+private
+
+def nilify_blanks
+  attributes.each do |column, _value|
+    self[column].present? || self[column] = nil
   end
 end
 
