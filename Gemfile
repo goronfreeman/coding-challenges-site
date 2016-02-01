@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'dotenv-rails', :groups => [:development, :test]
+gem 'dotenv-rails', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
@@ -60,3 +60,5 @@ group :development do
   gem 'quiet_assets'
   gem 'terminal-notifier-guard', git: 'git@github.com:/goronfreeman/terminal-notifier-guard.git'
 end
+
+gem 'simplecov', require: false, group: :test
