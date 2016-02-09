@@ -46,8 +46,8 @@ end
 
 describe 'associations' do
   it 'destroys dependent comments' do
-    comment = build(:comment)
-    challenge = Challenge.where(id: comment.challenge_id)
+    comment = create(:comment)
+    challenge = Challenge.find(comment.challenge_id)
 
     expect { challenge.destroy }.to change { Comment.count }.by(-1)
   end
