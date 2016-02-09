@@ -112,29 +112,36 @@ describe ChallengesController do
     end
 
     describe 'POST #create' do
+      before do
+        @tag = create(:tag)
+      end
+
       context 'with valid attributes' do
         it 'saves the new challenge to the database' do
-          # FIXME
-          # expect { post :create, challenge: attributes_for(:challenge_with_tag) }.to change(Challenge, :count).by(1)
-          puts attributes_for(:challenge_with_tag)
+          expect {
+            post :create, challenge: attributes_for(:challenge).merge(
+              challenge_tags_attributes: [tag_id: @tag.id])
+          }.to change(Challenge, :count).by(1)
         end
 
         it 'redirects to the homepage' do
-          # FIXME
-          post :create, challenge: attributes_for(:challenge, :with_tag, user_id: @user.id)
+          post :create, challenge: attributes_for(:challenge).merge(
+            challenge_tags_attributes: [tag_id: @tag.id])
           expect(response).to redirect_to(root_path)
         end
       end
 
       context 'with invalid attributes' do
         it 'does not save the new challenge to the database' do
-          # FIXME
-          expect { post :create, challenge: attributes_for(:challenge, :with_tag, name: nil) }.to_not change(Challenge, :count)
+          expect {
+            post :create, challenge: attributes_for(:challenge, name: nil).merge(
+              challenge_tags_attributes: [tag_id: @tag.id])
+          }.to_not change(Challenge, :count)
         end
 
         it 're-renders the :new template' do
-          # FIXME
-          post :create, challenge: attributes_for(:challenge, :with_tag, name: nil)
+          post :create, challenge: attributes_for(:challenge, name: nil).merge(
+            challenge_tags_attributes: [tag_id: @tag.id])
           expect(response).to render_template(:new)
         end
       end
