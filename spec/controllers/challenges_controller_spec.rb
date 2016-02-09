@@ -1,23 +1,16 @@
 require 'rails_helper'
-require 'faker'
 
 describe ChallengesController do
   context 'user is logged in' do
-    before(:each) do
-      @my_user = User.create(
-        email: Faker::Internet.email,
-        username: Faker::Internet.user_name,
-        password: 'password',
-        password_confirmation: 'password'
-      )
-      sign_in @my_user
-      @my_tag = Tag.create(name: 'css')
+    before do
+      @user = create(:user)
+      sign_in @user
     end
 
     describe 'GET #easy' do
-      it 'has a 200 status code' do
+      it 'returns 200' do
         get :easy
-        expect(response.status).to eq(200)
+        expect(response).to be_success
       end
 
       it 'renders the :easy template' do
@@ -26,24 +19,17 @@ describe ChallengesController do
       end
 
       it 'populates an array of easy challenges' do
-        easy_challenge = @my_user.challenges.create(
-          name: Faker::App.name,
-          short_description: Faker::Lorem.sentence,
-          long_description: Faker::Lorem.sentence,
-          difficulty: 'easy',
-          challenge_tags_attributes: [
-            { tag_id: @my_tag.id }
-          ]
-        )
+        easy_challenge = create(:challenge, :with_tag)
+
         get :easy
         expect(assigns(:easy)).to eq([easy_challenge])
       end
     end
 
     describe 'GET #medium' do
-      it 'has a 200 status code' do
+      it 'returns 200' do
         get :medium
-        expect(response.status).to eq(200)
+        expect(response).to be_success
       end
 
       it 'renders the :medium template' do
@@ -52,24 +38,17 @@ describe ChallengesController do
       end
 
       it 'populates an array of medium challenges' do
-        medium_challenge = @my_user.challenges.create(
-          name: Faker::App.name,
-          short_description: Faker::Lorem.sentence,
-          long_description: Faker::Lorem.sentence,
-          difficulty: 'medium',
-          challenge_tags_attributes: [
-            { tag_id: @my_tag.id }
-          ]
-        )
+        medium_challenge = create(:challenge, :with_tag, difficulty: 'medium')
+
         get :medium
         expect(assigns(:medium)).to eq([medium_challenge])
       end
     end
 
     describe 'GET #hard' do
-      it 'has a 200 status code' do
+      it 'returns 200' do
         get :hard
-        expect(response.status).to eq(200)
+        expect(response).to be_success
       end
 
       it 'renders the :hard template' do
@@ -78,24 +57,17 @@ describe ChallengesController do
       end
 
       it 'populates an array of hard challenges' do
-        hard_challenge = @my_user.challenges.create(
-          name: Faker::App.name,
-          short_description: Faker::Lorem.sentence,
-          long_description: Faker::Lorem.sentence,
-          difficulty: 'hard',
-          challenge_tags_attributes: [
-            { tag_id: @my_tag.id }
-          ]
-        )
+        hard_challenge = create(:challenge, :with_tag, difficulty: 'hard')
+
         get :hard
         expect(assigns(:hard)).to eq([hard_challenge])
       end
     end
 
     describe 'GET #index' do
-      it 'has a 200 status code' do
+      it 'returns 200' do
         get :index
-        expect(response.status).to eq(200)
+        expect(response).to be_success
       end
 
       it 'renders the :index template' do
@@ -104,48 +76,33 @@ describe ChallengesController do
       end
 
       it 'populates an array of challenges' do
-        my_challenge = @my_user.challenges.create(
-          name: Faker::App.name,
-          short_description: Faker::Lorem.sentence,
-          long_description: Faker::Lorem.sentence,
-          difficulty: 'easy',
-          challenge_tags_attributes: [
-            { tag_id: @my_tag.id }
-          ]
-        )
+        challenge = create(:challenge, :with_tag)
+
         get :index
-        expect(assigns(:challenges)).to eq([my_challenge])
+        expect(assigns(:challenges)).to eq([challenge])
       end
     end
 
     describe 'GET #show' do
-      before(:each) do
-        @my_challenge = @my_user.challenges.create(
-          name: Faker::App.name,
-          short_description: Faker::Lorem.sentence,
-          long_description: Faker::Lorem.sentence,
-          difficulty: 'easy',
-          challenge_tags_attributes: [
-            { tag_id: @my_tag.id }
-          ]
-        )
+      before do
+        @challenge = create(:challenge, :with_tag)
       end
 
-      it 'has a 200 status code' do
-        get :show, id: @my_challenge.id
-        expect(response.status).to eq(200)
+      it 'returns 200' do
+        get :show, id: @challenge.id
+        expect(response).to be_success
       end
 
       it 'renders the :show template' do
-        get :show, id: @my_challenge.id
+        get :show, id: @challenge.id
         expect(response).to render_template(:show)
       end
     end
 
     describe 'GET #new' do
-      it 'has a 200 status code' do
+      it 'returns 200' do
         get :new
-        expect(response.status).to eq(200)
+        expect(response).to be_success
       end
 
       it 'renders the :new template' do
@@ -155,150 +112,102 @@ describe ChallengesController do
     end
 
     describe 'POST #create' do
-      it 'has a 200 status code' do
-        expect(response.status).to eq(200)
-      end
-
       context 'with valid attributes' do
         it 'saves the new challenge to the database' do
-          expect {
-            post :create, challenge: {
-              name: Faker::App.name,
-              short_description: Faker::Lorem.sentence,
-              long_description: Faker::Lorem.sentence,
-              difficulty: 'easy',
-              challenge_tags_attributes: [
-                { tag_id: @my_tag.id }
-              ] }
-          }.to change(Challenge, :count).by(1)
+          # FIXME
+          # expect { post :create, challenge: attributes_for(:challenge_with_tag) }.to change(Challenge, :count).by(1)
+          puts attributes_for(:challenge_with_tag)
         end
 
         it 'redirects to the homepage' do
-          post :create, challenge: {
-            name: Faker::App.name,
-            short_description: Faker::Lorem.sentence,
-            long_description: Faker::Lorem.sentence,
-            difficulty: 'easy',
-            challenge_tags_attributes: [
-              { tag_id: @my_tag.id }
-            ] }
+          # FIXME
+          post :create, challenge: attributes_for(:challenge, :with_tag, user_id: @user.id)
           expect(response).to redirect_to(root_path)
         end
       end
 
       context 'with invalid attributes' do
         it 'does not save the new challenge to the database' do
-          expect {
-            post :create, challenge: {
-              name: nil,
-              short_description: Faker::Lorem.sentence,
-              long_description: Faker::Lorem.sentence,
-              difficulty: 'easy',
-              challenge_tags_attributes: [
-                { tag_id: @my_tag.id }
-              ] }
-          }.to_not change(Challenge, :count)
+          # FIXME
+          expect { post :create, challenge: attributes_for(:challenge, :with_tag, name: nil) }.to_not change(Challenge, :count)
         end
 
         it 're-renders the :new template' do
-          post :create, challenge: {
-            name: nil,
-            short_description: Faker::Lorem.sentence,
-            long_description: Faker::Lorem.sentence,
-            difficulty: 'easy',
-            challenge_tags_attributes: [
-              { tag_id: @my_tag.id }
-            ] }
+          # FIXME
+          post :create, challenge: attributes_for(:challenge, :with_tag, name: nil)
           expect(response).to render_template(:new)
         end
       end
     end
 
     describe 'GET #edit' do
-      before(:each) do
-        @my_challenge = @my_user.challenges.create(
-          name: Faker::App.name,
-          short_description: Faker::Lorem.sentence,
-          long_description: Faker::Lorem.sentence,
-          difficulty: 'easy',
-          challenge_tags_attributes: [
-            { tag_id: @my_tag.id }
-          ]
-        )
+      before do
+        @challenge = create(:challenge, :with_tag, user_id: @user.id)
       end
 
-      it 'has a 200 status code' do
-        get :edit, id: @my_challenge.id
-        expect(response.status).to eq(200)
+      it 'returns 200' do
+        get :edit, id: @challenge.id
+        expect(response).to be_success
       end
 
       context 'current user owns challenge' do
         it 'renders the :edit template' do
-          get :edit, id: @my_challenge.id
+          get :edit, id: @challenge.id
           expect(response).to render_template(:edit)
         end
       end
 
       context 'current user does not own challenge' do
-        before(:each) do
-          sign_out @my_user
-          @other_user = User.create(
-            email: Faker::Internet.email,
-            username: Faker::Internet.user_name,
-            password: 'password',
-            password_confirmation: 'password'
-          )
-          sign_in @other_user
+        before do
+          sign_out @user
+          @another_user = create(:user)
+          sign_in @another_user
         end
 
         it 'does not render the :edit template' do
-          get :edit, id: @my_challenge.id
+          get :edit, id: @challenge.id
           expect(response).to_not render_template(:edit)
         end
 
         it 'redirects to the home page' do
-          get :edit, id: @my_challenge.id
+          get :edit, id: @challenge.id
           expect(response).to redirect_to(root_path)
         end
       end
     end
 
     describe 'PUT #update' do
-      before(:each) do
-        @my_challenge = @my_user.challenges.create(
-          name: Faker::App.name,
-          short_description: Faker::Lorem.sentence,
-          long_description: Faker::Lorem.sentence,
-          difficulty: 'easy',
-          challenge_tags_attributes: [
-            { tag_id: @my_tag.id }
-          ]
-        )
+      before do
+        @challenge = create(:challenge, :with_tag, user_id: @user.id)
       end
 
       context 'with valid attributes' do
+        before do
+          put :update, id: @challenge.id, challenge: { name: 'Updated' }
+        end
+
         it 'saves the edited challenge to the database' do
-          put :update, id: @my_challenge.id, challenge: { name: 'Updated' }
-          @my_challenge.reload
-          expect(@my_challenge.name).to include('Updated')
+          @challenge.reload
+          expect(@challenge.name).to include('Updated')
         end
 
         it 'redirects to the homepage' do
-          put :update, id: @my_challenge.id, challenge: { name: 'Updated' }
           expect(response).to redirect_to(root_path)
         end
       end
 
       context 'with invalid attributes' do
+        before do
+          put :update, id: @challenge.id, challenge: { name: nil }
+        end
+
         it 'does not save the edited challenge to the database' do
-          put :update, id: @my_challenge.id, challenge: { name: nil }
-          @my_challenge.reload
-          expect(@my_challenge.name).to_not be(nil)
+          @challenge.reload
+          expect(@challenge.name).to_not be(nil)
         end
 
         it 're-renders the :edit template' do
-          put :update, id: @my_challenge.id, challenge: { name: nil }
-          @my_challenge.reload
+          @challenge.reload
           expect(response).to render_template(:edit)
         end
       end
@@ -306,58 +215,34 @@ describe ChallengesController do
 
     describe 'DELETE #destroy' do
       context 'current user owns challenge' do
-        before(:each) do
-          @my_challenge = @my_user.challenges.create!(
-            name: Faker::App.name,
-            short_description: Faker::Lorem.sentence,
-            long_description: Faker::Lorem.sentence,
-            difficulty: 'easy',
-            challenge_tags_attributes: [
-              { tag_id: @my_tag.id }
-            ]
-          )
+        before do
+          @challenge = create(:challenge, :with_tag, user_id: @user.id)
         end
 
         it 'removes the challenge from the database' do
-          expect { delete :destroy, id: @my_challenge.id }.to change(Challenge, :count).by(-1)
+          expect { delete :destroy, id: @challenge.id }.to change(Challenge, :count).by(-1)
         end
 
         it 'redirects to the home page' do
-          delete :destroy, id: @my_challenge.id
+          delete :destroy, id: @challenge.id
           expect(response).to redirect_to(root_path)
         end
       end
 
       context 'current user does not own challenge' do
-        before(:each) do
-          @my_challenge = @my_user.challenges.create!(
-            name: Faker::App.name,
-            short_description: Faker::Lorem.sentence,
-            long_description: Faker::Lorem.sentence,
-            difficulty: 'easy',
-            challenge_tags_attributes: [
-              { tag_id: @my_tag.id }
-            ]
-          )
-
-          sign_out @my_user
-
-          @other_user = User.create(
-            email: Faker::Internet.email,
-            username: Faker::Internet.user_name,
-            password: 'password',
-            password_confirmation: 'password'
-          )
-
-          sign_in @other_user
+        before do
+          @challenge = create(:challenge, :with_tag, user_id: @user.id)
+          sign_out @user
+          @another_user = create(:user)
+          sign_in @another_user
         end
 
         it 'does not remove the challenge from the database' do
-          expect { delete :destroy, id: @my_challenge.id }.to change(Challenge, :count).by(0)
+          expect { delete :destroy, id: @challenge.id }.to change(Challenge, :count).by(0)
         end
 
         it 'redirects to the home page' do
-          delete :destroy, id: @my_challenge.id
+          delete :destroy, id: @challenge.id
           expect(response).to redirect_to(root_path)
         end
       end
@@ -365,14 +250,10 @@ describe ChallengesController do
   end
 
   context 'user is logged out' do
-    before(:each) do
-      @my_tag = Tag.create(name: 'css')
-    end
-
     describe 'GET #easy' do
-      it 'has a 200 status code' do
+      it 'returns 200' do
         get :easy
-        expect(response.status).to eq(200)
+        expect(response).to be_success
       end
 
       it 'renders the :easy template' do
@@ -381,32 +262,17 @@ describe ChallengesController do
       end
 
       it 'populates an array of easy challenges' do
-        my_user = User.create(
-          email: Faker::Internet.email,
-          username: Faker::Internet.user_name,
-          password: 'password',
-          password_confirmation: 'password'
-        )
-
-        my_challenge = my_user.challenges.create(
-          name: Faker::App.name,
-          short_description: Faker::Lorem.sentence,
-          long_description: Faker::Lorem.sentence,
-          difficulty: 'easy',
-          challenge_tags_attributes: [
-            { tag_id: @my_tag.id }
-          ]
-        )
+        easy_challenge = create(:challenge, :with_tag)
 
         get :easy
-        expect(assigns(:easy)).to eq([my_challenge])
+        expect(assigns(:easy)).to eq([easy_challenge])
       end
     end
 
     describe 'GET #medium' do
-      it 'has a 200 status code' do
+      it 'returns 200' do
         get :medium
-        expect(response.status).to eq(200)
+        expect(response).to be_success
       end
 
       it 'renders the :medium template' do
@@ -415,32 +281,17 @@ describe ChallengesController do
       end
 
       it 'populates an array of medium challenges' do
-        my_user = User.create(
-          email: Faker::Internet.email,
-          username: Faker::Internet.user_name,
-          password: 'password',
-          password_confirmation: 'password'
-        )
-
-        my_challenge = my_user.challenges.create(
-          name: Faker::App.name,
-          short_description: Faker::Lorem.sentence,
-          long_description: Faker::Lorem.sentence,
-          difficulty: 'medium',
-          challenge_tags_attributes: [
-            { tag_id: @my_tag.id }
-          ]
-        )
+        medium_challenge = create(:challenge, :with_tag, difficulty: 'medium')
 
         get :medium
-        expect(assigns(:medium)).to eq([my_challenge])
+        expect(assigns(:medium)).to eq([medium_challenge])
       end
     end
 
     describe 'GET #hard' do
-      it 'has a 200 status code' do
+      it 'returns 200' do
         get :hard
-        expect(response.status).to eq(200)
+        expect(response).to be_success
       end
 
       it 'renders the :hard template' do
@@ -449,32 +300,17 @@ describe ChallengesController do
       end
 
       it 'populates an array of hard challenges' do
-        my_user = User.create(
-          email: Faker::Internet.email,
-          username: Faker::Internet.user_name,
-          password: 'password',
-          password_confirmation: 'password'
-        )
-
-        my_challenge = my_user.challenges.create(
-          name: Faker::App.name,
-          short_description: Faker::Lorem.sentence,
-          long_description: Faker::Lorem.sentence,
-          difficulty: 'hard',
-          challenge_tags_attributes: [
-            { tag_id: @my_tag.id }
-          ]
-        )
+        hard_challenge = create(:challenge, :with_tag, difficulty: 'hard')
 
         get :hard
-        expect(assigns(:hard)).to eq([my_challenge])
+        expect(assigns(:hard)).to eq([hard_challenge])
       end
     end
 
     describe 'GET #index' do
-      it 'has a 200 status code' do
+      it 'returns 200' do
         get :index
-        expect(response.status).to eq(200)
+        expect(response).to be_success
       end
 
       it 'renders the :index template' do
@@ -483,55 +319,25 @@ describe ChallengesController do
       end
 
       it 'populates an array of challenges' do
-        my_user = User.create(
-          email: Faker::Internet.email,
-          username: Faker::Internet.user_name,
-          password: 'password',
-          password_confirmation: 'password'
-        )
-
-        my_challenge = my_user.challenges.create(
-          name: Faker::App.name,
-          short_description: Faker::Lorem.sentence,
-          long_description: Faker::Lorem.sentence,
-          difficulty: 'easy',
-          challenge_tags_attributes: [
-            { tag_id: @my_tag.id }
-          ]
-        )
+        challenge = create(:challenge, :with_tag)
 
         get :index
-        expect(assigns(:challenges)).to eq([my_challenge])
+        expect(assigns(:challenges)).to eq([challenge])
       end
     end
 
     describe 'GET #show' do
       before(:each) do
-        @my_user = User.create(
-          email: Faker::Internet.email,
-          username: Faker::Internet.user_name,
-          password: 'password',
-          password_confirmation: 'password'
-        )
-
-        @my_challenge = @my_user.challenges.create(
-          name: Faker::App.name,
-          short_description: Faker::Lorem.sentence,
-          long_description: Faker::Lorem.sentence,
-          difficulty: 'easy',
-          challenge_tags_attributes: [
-            { tag_id: @my_tag.id }
-          ]
-        )
+        @challenge = create(:challenge, :with_tag)
       end
 
-      it 'has a 200 status code' do
-        get :show, id: @my_challenge.id
-        expect(response.status).to eq(200)
+      it 'returns 200' do
+        get :show, id: @challenge.id
+        expect(response).to be_success
       end
 
       it 'renders the :show template' do
-        get :show, id: @my_challenge.id
+        get :show, id: @challenge.id
         expect(response).to render_template(:show)
       end
     end

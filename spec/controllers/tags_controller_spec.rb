@@ -1,36 +1,38 @@
 require 'rails_helper'
-require 'faker'
 
 describe TagsController do
   describe 'GET #index' do
-    it 'has a 200 status code' do
-      expect(response.status).to eq(200)
+    before do
+      get :index
+    end
+
+    it 'returns 200' do
+      expect(response).to be_success
     end
 
     it 'renders the :index template' do
-      get :index
       expect(response).to render_template(:index)
     end
 
     it 'populates an array of tags' do
-      my_tag = Tag.create(name: 'css')
+      tag = create(:tag)
+
       get :index
-      expect(assigns(:tags)).to eq([my_tag])
+      expect(assigns(:tags)).to eq([tag])
     end
   end
 
   describe 'GET #show' do
-    before(:each) do
-      @my_tag = Tag.create(name: 'css')
+    before do
+      @tag = create(:tag)
+      get :show, name: @tag.name
     end
 
-    it 'has a 200 status code' do
-      get :show, name: @my_tag.name
-      expect(response.status).to eq(200)
+    it 'returns 200' do
+      expect(response).to be_success
     end
 
     it 'renders the :show template' do
-      get :show, name: @my_tag.name
       expect(response).to render_template(:show)
     end
   end
