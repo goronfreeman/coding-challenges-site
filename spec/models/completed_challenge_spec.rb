@@ -1,22 +1,25 @@
 require 'rails_helper'
-require 'faker'
 
 describe CompletedChallenge do
-  it 'is valid with all required fields' do
-    completed_challenge = build(:completed_challenge)
+  let(:completed_challenge) { create(:completed_challenge) }
 
+  it 'is valid with valid attributes' do
     expect(completed_challenge).to be_valid
   end
 
-  it 'requires user_id' do
-    completed_challenge = build(:completed_challenge, user_id: nil)
-
-    expect(completed_challenge).to_not be_valid
+  describe '#user_id' do
+    it 'is required' do
+      completed_challenge.user_id = nil
+      completed_challenge.valid?
+      expect(completed_challenge.errors[:user_id].size).to eq(1)
+    end
   end
 
-  it 'requires a challenge_id' do
-    completed_challenge = build(:completed_challenge, challenge_id: nil)
-
-    expect(completed_challenge).to_not be_valid
+  describe '#challenge_id' do
+    it 'is required' do
+      completed_challenge.challenge_id = nil
+      completed_challenge.valid?
+      expect(completed_challenge.errors[:challenge_id].size).to eq(1)
+    end
   end
 end

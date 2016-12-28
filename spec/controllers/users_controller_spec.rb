@@ -2,15 +2,12 @@ require 'rails_helper'
 
 describe UsersController do
   context 'user is logged in' do
-    before do
-      @user = create(:user)
-      sign_in @user
-    end
+    let(:user) { create(:user) }
+
+    before { sign_in user }
 
     describe 'GET #show' do
-      before do
-        get :show, username: @user.username
-      end
+      before { get :show, username: user.username }
 
       it 'returns 200' do
         expect(response).to be_success
@@ -22,9 +19,7 @@ describe UsersController do
     end
 
     describe 'GET #comments' do
-      before do
-        get :comments, username: @user.username
-      end
+      before { get :comments, username: user.username }
 
       it 'returns 200' do
         expect(response).to be_success
@@ -36,9 +31,7 @@ describe UsersController do
     end
 
     describe 'GET #submitted' do
-      before do
-        get :submitted, username: @user.username
-      end
+      before { get :submitted, username: user.username }
 
       it 'returns 200' do
         expect(response).to be_success
@@ -50,9 +43,7 @@ describe UsersController do
     end
 
     describe 'GET #starred' do
-      before do
-        get :starred, username: @user.username
-      end
+      before { get :starred, username: user.username }
 
       it 'returns 200' do
         expect(response).to be_success
@@ -64,9 +55,7 @@ describe UsersController do
     end
 
     describe 'GET #completed' do
-      before do
-        get :completed, username: @user.username
-      end
+      before { get :completed, username: user.username }
 
       it 'returns 200' do
         expect(response).to be_success

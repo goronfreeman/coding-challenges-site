@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 describe TagsController do
+  let(:tag) { create(:tag) }
+
   describe 'GET #index' do
-    before do
-      get :index
-    end
+    before { get :index }
 
     it 'returns 200' do
       expect(response).to be_success
@@ -15,18 +15,13 @@ describe TagsController do
     end
 
     it 'populates an array of tags' do
-      tag = create(:tag)
-
       get :index
       expect(assigns(:tags)).to eq([tag])
     end
   end
 
   describe 'GET #show' do
-    before do
-      @tag = create(:tag)
-      get :show, name: @tag.name
-    end
+    before { get :show, name: tag.name }
 
     it 'returns 200' do
       expect(response).to be_success

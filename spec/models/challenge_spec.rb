@@ -1,54 +1,81 @@
 require 'rails_helper'
 
 describe Challenge do
-  it 'is valid with all required fields' do
-    challenge = create(:challenge, :with_tag)
+  let(:challenge) { create(:challenge, :with_tag) }
 
+  it 'is valid with valid attributes' do
     expect(challenge).to be_valid
   end
 
-  it 'is invalid without a user_id' do
-    challenge = build(:challenge, :with_tag, user_id: nil)
-
-    expect(challenge).to_not be_valid
+  describe '#user_id' do
+    it 'is required' do
+      challenge.user_id = nil
+      challenge.valid?
+      expect(challenge.errors[:user_id].size).to eq(1)
+    end
   end
 
-  it 'is invalid without a name' do
-    challenge = build(:challenge, :with_tag, name: nil)
+  describe '#name' do
+    it 'is required' do
+      challenge.name = nil
+      challenge.valid?
+      expect(challenge.errors[:name].size).to eq(1)
+    end
 
-    expect(challenge).to_not be_valid
+    it 'is unique' do
+      another_challenge = build(:challenge, name: challenge.name)
+      another_challenge.valid?
+      expect(another_challenge.errors[:name].size).to eq(1)
+    end
   end
 
-  it 'is invalid without a short_description' do
-    challenge = build(:challenge, :with_tag, short_description: nil)
+  describe '#short_description' do
+    it 'is required' do
+      challenge.short_description = nil
+      challenge.valid?
+      expect(challenge.errors[:short_description].size).to eq(1)
+    end
 
-    expect(challenge).to_not be_valid
+    it 'is unique' do
+      another_challenge = build(:challenge, short_description: challenge.short_description)
+      another_challenge.valid?
+      expect(another_challenge.errors[:short_description].size).to eq(1)
+    end
   end
 
-  it 'is invalid without a long_description' do
-    challenge = build(:challenge, :with_tag, long_description: nil)
+  describe '#long_description' do
+    it 'is required' do
+      challenge.long_description = nil
+      challenge.valid?
+      expect(challenge.errors[:long_description].size).to eq(1)
+    end
 
-    expect(challenge).to_not be_valid
+    it 'is unique' do
+      another_challenge = build(:challenge, long_description: challenge.long_description)
+      another_challenge.valid?
+      expect(another_challenge.errors[:long_description].size).to eq(1)
+    end
   end
 
-  it 'is invalid without a difficulty' do
-    challenge = build(:challenge, :with_tag, difficulty: nil)
-
-    expect(challenge).to_not be_valid
+  describe '#difficulty' do
+    it 'is required' do
+      challenge.difficulty = nil
+      challenge.valid?
+      expect(challenge.errors[:difficulty].size).to eq(1)
+    end
   end
 
-  it 'is invalid without a challenge_tag' do
-    challenge = build(:challenge, :with_tag, challenge_tags_attributes: [tag_id: nil])
-
-    expect(challenge).to_not be_valid
+  describe '#challenge_tags' do
+    it 'is required' do
+      challenge.challenge_tags = []
+      challenge.valid?
+      expect(challenge.errors[:challenge_tags].size).to eq(1)
+    end
   end
-end
 
-describe 'associations' do
   it 'destroys dependent comments' do
     comment = create(:comment)
     challenge = Challenge.find(comment.challenge_id)
-
     expect { challenge.destroy }.to change { Comment.count }.by(-1)
   end
 end

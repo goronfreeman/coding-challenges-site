@@ -1,27 +1,33 @@
 require 'rails_helper'
 
 describe Comment do
-  it 'is valid with all required fields' do
-    comment = build(:comment)
+  let(:comment) { create(:comment) }
 
+  it 'is valid with valid attributes' do
     expect(comment).to be_valid
   end
 
-  it 'requires a user_id' do
-    comment = build(:comment, user_id: nil)
-
-    expect(comment).to_not be_valid
+  describe '#user_id' do
+    it 'is required' do
+      comment.user_id = nil
+      comment.valid?
+      expect(comment.errors[:user_id].size).to eq(1)
+    end
   end
 
-  it 'requires a challenge_id' do
-    comment = build(:comment, challenge_id: nil)
-
-    expect(comment).to_not be_valid
+  describe '#challenge_id' do
+    it 'is required' do
+      comment.challenge_id = nil
+      comment.valid?
+      expect(comment.errors[:challenge_id].size).to eq(1)
+    end
   end
 
-  it 'requires a body' do
-    comment = build(:comment, body: nil)
-
-    expect(comment).to_not be_valid
+  describe '#body' do
+    it 'is required' do
+      comment.body = nil
+      comment.valid?
+      expect(comment.errors[:body].size).to eq(1)
+    end
   end
 end

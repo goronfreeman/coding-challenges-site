@@ -1,28 +1,36 @@
 require 'rails_helper'
 
 describe User do
-  it 'is valid with all required fields' do
-    user = create(:user)
+  let(:user) { create(:user) }
 
+  it 'is valid with valid attributes' do
     expect(user).to be_valid
   end
 
-  it 'requires a username' do
-    user = build(:user, username: nil)
+  describe '#username' do
+    it 'is required' do
+      user.username = nil
+      user.valid?
+      expect(user.errors[:username].size).to eq(1)
+    end
 
-    expect(user).to be_invalid
+    it 'is unique' do
+      another_user = build(:user, username: user.username)
+      another_user.valid?
+      expect(another_user.errors[:username].size).to eq(1)
+    end
   end
 
-  it 'accepts valid image url' do
-    user = create(:user, image: 'https://avatars3.githubusercontent.com/u/5210483?v=3&s=460')
+  describe '#image' do
+    it 'is accepted' do
+      user.image = 'https://avatars3.githubusercontent.com/u/5210483?v=3&s=460'
+      expect(user).to be_valid
+      expect(user.image).to_not be_nil
+    end
 
-    expect(user).to be_valid
-    expect(user.image).to_not be_nil
-  end
-
-  it 'converts blank image url to nil' do
-    user = create(:user, image: '')
-
-    expect(user.image).to be_nil
+    it 'converts blank string to nil' do
+      user = create(:user, image: '')
+      expect(user.image).to be_nil
+    end
   end
 end
